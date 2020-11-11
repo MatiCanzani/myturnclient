@@ -1,0 +1,17 @@
+.title{
+    color: #ffffff;
+    text-align: center;
+    /* -webkit-text-stroke:  1.5px #373435; */
+}
+
+.subtitle{
+    color: #373435;
+    text-align: center;
+    /* font-size: 1.2rem; */
+}
+
+
+.calendar{
+    font-size: 1.3rem;
+    color: white
+}

@@ -175,13 +175,7 @@ const TurnSelector = () => {
       userHours: 0,
       userSatHours: satDays.hour,
     });
-    // getUserTurns(userSelection);
-
-    //setShowResults(true);
-    //setTimeout(() => {
-    //setShowResults(true);
-    //setLoading(false);
-    //}, 600);
+   
   };
 
   const reserve = () => {
@@ -358,7 +352,7 @@ const TurnSelector = () => {
 
           <Grid item xs={12} md={3}>
             <Paper elevation={3} className={classes.card}>
-              <Typography variant="h6" component={"h1"} align="center">
+              <Typography variant="h6" component={"h1"} align="center" style={{marginTop:"1rem"}}>
                 {" "}
                 Tu Selección:{" "}
               </Typography>

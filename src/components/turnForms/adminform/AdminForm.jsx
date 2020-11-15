@@ -1,6 +1,5 @@
 import React, { Fragment, useState, useContext, useEffect } from "react";
 import Hours from "../../hours/hour/Hours";
-import SatudayHourOptions from "../../hours/sathours/SaturdayHours";
 import DaysOptions from "../../days/Days";
 import { Button, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -78,26 +77,36 @@ const TurnSelector = () => {
         userHours: hours,
         userSatHours: 0,
       });
-    } else {
+    
+    }else 
+    if (days === "Martes / Jueves") {
       setUserTurns({
         userDay: days,
         userHours: hours,
-        userSatHours: satHours,
+        userSatHours: 0,
+      });
+   
+    } else
+    if (days === "Sábado") {
+      setUserTurns({
+        userDay: days,
+        userHours: 0,
+        userSatHours: hours,
       });
     }
   }, [days, hours, satHours]);
 
-useEffect(() => {
-  getUserTurns(userTurns);
-  //eslint-disable-next-line
-},[userTurns])
+// useEffect(() => {
+//   getUserTurns(userTurns);
+//   //eslint-disable-next-line
+// },[userTurns])
 
-console.log(userTurns)
+
 
   const handleSubmit = (e) => {
-    console.log(userTurns)
+    console.log(days)
     e.preventDefault();
-
+    console.log(userTurns)
     if (days === 0) {
       showAlert("Debes seleccionar un día");
     } else if (hours === 0) {
@@ -157,13 +166,7 @@ console.log(userTurns)
                 </Typography>
               </div>
               <Hours savedHours={savedHours} />
-              <div className={classes.flex}>
-                <Icon>
-                  <Watch style={{ color: "#373435" }} />
-                </Icon>
-                <Typography  variant="h6" className={classes.subTitle}>&nbsp;Sábados</Typography>
-              </div>
-              <SatudayHourOptions savedSatHours={savedSatHours} />
+              
             </Fragment>
           )}
           <div>

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import logo from "../assets/07.png";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Paper from "@material-ui/core/Paper";
@@ -7,35 +8,35 @@ import { Box} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import LMV from "./L_M_V";
-import MJ from "./M_J";
-import S from "./S";
-import Selection from "./Selection"
+import BackImg from "../assets/ryan-de-hamer-WIPIAJW2-P8-unsplash.jpg"
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
+    background: `url(${BackImg})`,
+    backgroundRepeat: "none",
+    backgroundSize: "cover"
   },
   logo: {
-    width: "15rem",
+    width: "12rem",
   },
   paper: {
     margin: theme.spacing(2, 1),
     display: "flex",
-    flexDirection: "column",
+    justifyContent: "center",
     alignItems: "center",
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
+    flexDirection: "column",
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    width:"60%"
   },
   box: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    flexDirection: "column",
   },
   title: {
       display: "flex",
@@ -65,7 +66,7 @@ const Home = (props) => {
 
     const userData = JSON.parse( localStorage.getItem("userInfo"));
     const isLoged = localStorage.getItem("logedIn");
-    console.log(isLoged);
+    console.log(isLoged); 
     console.log(userData);
 
     if (isLoged === "true") {
@@ -82,37 +83,16 @@ const Home = (props) => {
   };
 
   const classes = useStyles();
-
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
-      <Grid container xs={12} md={8}>
-        <Grid item xs={12} >
-          <Typography className={classes.title}>Clases</Typography>
-        </Grid>
-        <Grid container xs={12} md={4}>
-            <Grid item xs={12}  >
-              <LMV />
-            </Grid>
-        </Grid>
-        <Grid container xs={12} md={4}>
-            <Grid item xs={12} >
-              <MJ />
-            </Grid>
-        </Grid>
-        <Grid container xs={12} md={4}>
-            <Grid item xs={12} >
-              <S />
-            </Grid>
-        </Grid>
-      </Grid>
-      <Grid container xs={12} md={4}>
-        <Grid item xs={12} component={Paper} elevation={6} square>
-           <div className={classes.paper}>
-            {/* <div>
+      <Grid container >
+      <Grid item  md={7} />
+        <Grid item xs={12} md={5} component={Paper} elevation={3} square>
+          <Box className={classes.box}  mt={15}>
+            <div>
               <img src={`${logo}`} className={classes.logo} alt="logo" />
-            </div>  */}
-            <Selection />
+            </div>
             <Button
               onClick={redirects} 
               fullWidth
@@ -120,12 +100,12 @@ const Home = (props) => {
               color="primary"
               className={classes.submit}
             >
-              Reservar
+              Entrar
             </Button>
-            <Box mt={5}>
+            <Box mt={20}>
               <Copyright />
             </Box>
-          </div>
+          </Box>
         </Grid>
       </Grid>
     </Grid>

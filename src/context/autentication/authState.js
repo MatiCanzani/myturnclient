@@ -49,23 +49,21 @@ const AuthState = props => {
         };
         try {
             const reply = await axios.get('/auth')
-            console.log(reply.data.user,)
             dispatch({
                 type: GET_USER,
                 payload: reply.data.user,
             },)
-            dispatch(
-              { type: USER_ADMIN,
-                payload: reply.data.user.isAdmin
-            },
-            )
+            // dispatch(
+            //   { type: USER_ADMIN,
+            //     payload: reply.data.user.isAdmin
+            // },
+            // )
         } catch (error) {
             console.log(error.response);
             dispatch({
                 type: LOGIN_ERROR,
             })
         }
-        
     }
 
     const getAdmin = async () => {
@@ -85,16 +83,13 @@ const AuthState = props => {
             dispatch({
                 type: LOGIN_ERROR,
             })
-        }
-        
+        }   
     }
 
     //authentication when user login
     const userLogin = async data => {
-        console.log(data)
         try {
             const reply = await axios.post('/auth', data);
-            console.log(reply)
             dispatch({
                 type: LOGIN_OK,
                 payload: reply.data

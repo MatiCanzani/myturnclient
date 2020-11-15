@@ -16,7 +16,12 @@ export const GET_USERS_TURNS_BY_ID = "GET_USERS_TURNS_BY_ID";
 export const DELETE_TURN = "DELETE_TURN";
 export const SHOW_DAYS = "SHOW_DAYS";
 export const SHOW_HOURS = "SHOW_HOURS";
+export const SHOW_SATHOURS = "SHOW_SATHOURS";
+export const SHOW_THUSHOURS = "SHOW_THUSHOURS";
 export const SHOW_SPACE = "SHOW_SPACE";
+export const GET_SATHOURS = "GET_SATHOURS";
+export const GET_THUSHOURS = "GET_THUSHOURS";
+export const GET_HOURS = "GET_HOURS";
 
 export const GET_USERS_INFO = "GET_USERS_INFO";
 export const UPDATE_USER_INFO = "UPDATE_USER_INFO";

@@ -6,14 +6,14 @@ import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles, ThemeProvider } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import logo from "../../assets/logocontorno.png";
-import theme from "../../../themeConfig";
 import AlertContext from "../../../context/alert/AlertContext";
 import AuthContext from "../../../context/autentication/authContext";
 import Alert from "../../alerts/alerts";
-// import "./signup.css";
+import BackImg from "../../assets/ryan-de-hamer-WIPIAJW2-P8-unsplash.jpg";
+import Paper from "@material-ui/core/Paper";
 
 const Copyright = () => {
   return (
@@ -29,6 +29,12 @@ const Copyright = () => {
 };
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    height: "100vh",
+    background: `url(${BackImg})`,
+    backgroundRepeat: "none",
+    backgroundSize: "cover",
+  },
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
@@ -36,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   logo: {
-    width: "15rem",
+    width: "12rem",
   },
   form: {
     width: "100%", // Fix IE 11 issue.
@@ -153,9 +159,13 @@ const onSubmit = (e) => {
 };
 
   return (
-    <ThemeProvider theme={theme}>
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
+    <Grid container component="main" className={classes.root}>
+    <CssBaseline />
+    <Grid container xs={12}>
+      <Grid item xs={0} md={6} />
+      <Grid item xs={12} md={6} component={Paper} elevation={6} square>
+          <Container component="main" maxWidth="xs">
+            <CssBaseline />
       <div className={classes.paper}>
       <Box mb={2}>
             <img className={classes.logo} src={`${logo}`} alt="logo" />
@@ -167,6 +177,7 @@ const onSubmit = (e) => {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
+                size="small"
                 autoComplete="fname"
                 name="firstName"
                 variant="outlined"
@@ -182,6 +193,7 @@ const onSubmit = (e) => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
+                size="small"
                 variant="outlined"
                 required
                 fullWidth
@@ -196,6 +208,7 @@ const onSubmit = (e) => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
+              size="small"
                 variant="outlined"
                 required
                 fullWidth
@@ -210,6 +223,7 @@ const onSubmit = (e) => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
+              size="small"
                 variant="outlined"
                 required
                 fullWidth
@@ -224,6 +238,7 @@ const onSubmit = (e) => {
             </Grid>
             <Grid item xs={12}>
               <TextField
+              size="small"
                 variant="outlined"
                 required
                 fullWidth
@@ -239,6 +254,7 @@ const onSubmit = (e) => {
             
             <Grid item xs={12}>
               <TextField
+              size="small"
                 variant="outlined"
                 required
                 fullWidth
@@ -254,6 +270,7 @@ const onSubmit = (e) => {
             </Grid>
             <Grid item xs={12}>
               <TextField
+              size="small"
                  variant="outlined"
                  margin="normal"
                  required
@@ -290,8 +307,9 @@ const onSubmit = (e) => {
       <Box mt={5}>
         <Copyright className={classes.link} />
       </Box>
-    </Container>
-
-    </ThemeProvider>
+      </Container>
+        </Grid>
+      </Grid>
+    </Grid>
   );
 }

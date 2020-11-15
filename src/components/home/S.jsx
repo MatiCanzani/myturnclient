@@ -1,5 +1,4 @@
-import React, { Fragment } from "react";
-import CssBaseline from "@material-ui/core/CssBaseline";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import Paper from "@material-ui/core/Paper";
 import {
   Divider,
@@ -10,6 +9,12 @@ import {
 } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
+import turnContext from "../../context/turn/turnContext";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -18,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
   },
-
   form: {
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
@@ -26,141 +30,103 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
-  box: {
-    flexGrow: 1,
-    justifyContent: "center",
-  },
   title: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     fontSize: "1.1rem",
     marginTop: "0.6rem",
-},
+  },
+  list: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
 }));
 
-const ClassList = () => {
+const SAT = ({ savedSatDays, disabled }) => {
   const classes = useStyles();
 
-  // function generate(element) {
-  //   return [0, 1, 2].map((value) =>
-  //     React.cloneElement(element, {
-  //       key: value,
-  //     }),
-  //   );
-  // }
+  const [value, setValue] = useState("");
+  const [selection, setSelection] = useState({
+    days: "",
+    hour: value,
+  });
+
+  const classTurnContext = useContext(turnContext);
+  const { satHours } = classTurnContext;
+
+  // useEffect(() => {
+  //   getHoursSat();
+  //   // eslint-disable-next-line
+  // }, []);
+
+  useEffect(() => {
+    savedSatDays(selection);
+      // eslint-disable-next-line
+  }, [selection]);
+
+  const handleClick = (event) => {
+    if (event.target.value === value) {
+      setValue("");
+      setSelection({
+        days: "",
+        hour: value,
+      });
+    } else {
+      setValue(event.target.value);
+      setSelection({
+        days: "Sábado",
+        hour: event.target.value,
+      });
+    }
+  };
 
   return (
     <Fragment>
       <Paper className={classes.paper}>
         <Grid item xs={12}>
-        <Typography className={classes.title}>
-           Sábado
-          </Typography>
-          <div>
-            <List className={classes.box}>
-              {/* {generate( */}
-
-              <ListItem>
-                <ListItemText variant="body1" color="initial">
-                  13:00 Hs
-                </ListItemText>
-              <ListItemText style={{ backgroundColor: "yellow" }}>
-                Disponible
-              </ListItemText>
-              </ListItem>
-              <Divider />
-              <ListItem>
-                <ListItemText variant="body1" color="initial">
-                  13:00 Hs
-                </ListItemText>
-              <ListItemText style={{ backgroundColor: "yellow" }}>
-                Disponible
-              </ListItemText>
-              </ListItem>
-              <Divider />
-              <ListItem>
-                <ListItemText variant="body1" color="initial">
-                  13:00 Hs
-                </ListItemText>
-              <ListItemText style={{ backgroundColor: "yellow" }}>
-                Disponible
-              </ListItemText>
-              </ListItem>
-              <Divider />
-              <ListItem>
-                <ListItemText variant="body1" color="initial">
-                  13:00 Hs
-                </ListItemText>
-              <ListItemText style={{ backgroundColor: "yellow" }}>
-                Disponible
-              </ListItemText>
-              </ListItem>
-              <Divider />
-              <ListItem>
-                <ListItemText variant="body1" color="initial">
-                  13:00 Hs
-                </ListItemText>
-              <ListItemText style={{ backgroundColor: "yellow" }}>
-                Disponible
-              </ListItemText>
-              </ListItem>
-              <Divider />
-              <ListItem>
-                <ListItemText variant="body1" color="initial">
-                  13:00 Hs
-                </ListItemText>
-              <ListItemText style={{ backgroundColor: "yellow" }}>
-                Disponible
-              </ListItemText>
-              </ListItem>
-              <Divider />
-              <ListItem>
-                <ListItemText variant="body1" color="initial">
-                  13:00 Hs
-                </ListItemText>
-              <ListItemText style={{ backgroundColor: "yellow" }}>
-                Disponible
-              </ListItemText>
-              </ListItem>
-              <Divider />
-              <ListItem>
-                <ListItemText variant="body1" color="initial">
-                  13:00 Hs
-                </ListItemText>
-              <ListItemText style={{ backgroundColor: "yellow" }}>
-                Disponible
-              </ListItemText>
-              </ListItem>
-              <Divider />
-              <ListItem>
-                <ListItemText variant="body1" color="initial">
-                  13:00 Hs
-                </ListItemText>
-              <ListItemText style={{ backgroundColor: "yellow" }}>
-                Disponible
-              </ListItemText>
-              </ListItem>
-              <Divider />
-              <ListItem>
-                <ListItemText variant="body1" color="initial">
-                  13:00 Hs
-                </ListItemText>
-              <ListItemText style={{ backgroundColor: "yellow" }}>
-                Disponible
-              </ListItemText>
-              </ListItem>
-              <Divider />
-           
-              {/* )} */}
-            </List>
-          </div>
+          <FormControl component="fieldset">
+          <FormLabel component="legend" style={{paddingTop: "1.5rem"}} align="center">
+            Sábado</FormLabel>
+            <RadioGroup name="Sábado" value={value}>
+              <Fragment>
+                <List>
+                  {satHours.map((hour, i) => (
+                    <Fragment key={hour.hours}>
+                      {hour.space === 19 ? null : (
+                        <Fragment>
+                          <ListItem key={i} id={hour.hours}>
+                            <ListItemText className={classes.hour}>
+                              <FormControlLabel
+                                value={hour.hours}
+                                control={<Radio onClick={handleClick}  disabled={disabled} />}
+                                label={
+                                  <Typography variant="body2">
+                                    {hour.hours}
+                                  </Typography>
+                                }
+                              />
+                            </ListItemText>
+                            <ListItemText>
+                              <Typography variant="body2">
+                                {19 - hour.space} disponibles.
+                              </Typography>
+                            </ListItemText>
+                          </ListItem>
+                          <Divider />
+                        </Fragment>
+                      )}
+                    </Fragment>
+                  ))}
+                </List>
+              </Fragment>
+            </RadioGroup>
+          </FormControl>
         </Grid>
-
-        <Divider />
       </Paper>
     </Fragment>
   );
 };
 
-export default ClassList;
+export default SAT;

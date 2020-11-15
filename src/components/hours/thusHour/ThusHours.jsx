@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
@@ -18,63 +18,58 @@ const useStyles = makeStyles((theme) => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
-  text: {
-    color: "##373435",
-  },
+
   input: {
-    borderColor: "##373435",
-    color: "##373435",
-    textAlign: "center",
+    borderColor: "#373435",
+    color: "#373435",
   },
 }));
 
-const SatudayHourOptions = ({ savedSatHours }) => {
+const HourOption = ({ savedHours }) => {
   const classes = useStyles();
   const [hour, setHour] = useState(0);
 
   const classTurnContext = useContext(turnContext);
-  const {  showSatHour,  showSatHours } = classTurnContext;
+  const { showThusHour, showThusHours } = classTurnContext;
 
+  useEffect(() => {
+    showThusHour();
+    // eslint-disable-next-line
+  }, []);
 
-  const handleChange = (event) => {
-    setHour(event.target.value);
+  const handleChange = (e) => {
+    setHour(e.target.value);
   };
 
-
-
   useEffect(() => {
-    showSatHour();
-      // eslint-disable-next-line
-  },[]);   
-
-
-  useEffect(() => {
-    savedSatHours(hour);
-  });   
-
+    savedHours(hour);
+  });
 
   return (
     <div className={classes.root}>
       <FormControl variant="outlined" className={classes.formControl}>
         <InputLabel
-          className={classes.text}
+          className={classes.input}
+          htmlFor="outlined-age-native-simple"
         >
           Hora
         </InputLabel>
         <Select
+          className={classes.input}
           native
           value={hour}
           onChange={handleChange}
           label="Hour"
-          className={classes.input }
           inputProps={{
             name: "hour",
-            id: "outlined-age-native-simple",
+            id: "outlined-hour-native-simple",
           }}
         >
           <option aria-label="None" value="" />
-          { showSatHours.map((hour) => (
-            <option key={hour.id} value={hour.hour} >{hour.hour}</option>
+          {showThusHours.map((hour) => (
+            <option key={hour._id} value={hour.hour}>
+              {hour.hour}
+            </option>
           ))}
         </Select>
       </FormControl>
@@ -82,4 +77,4 @@ const SatudayHourOptions = ({ savedSatHours }) => {
   );
 };
 
-export default SatudayHourOptions;
+export default HourOption;

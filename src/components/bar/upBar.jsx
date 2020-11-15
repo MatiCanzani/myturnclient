@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button";
 import AuthContext from "../../context/autentication/authContext";
 import Burguer from "./Menu";
 import { Link } from "react-router-dom";
+import logo from "../assets/logoblanco.png"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,14 +19,8 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "#373435 !important",
     },
   },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
   title: {
     flexGrow: 1,
-  },
-  menu: {
-    marginTop: "40px",
   },
   bar: {
     backgroundColor: "#373435",
@@ -34,6 +29,10 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
     color: "#ffffff",
   },
+  logo: {
+    width:"100px",
+    marginRight: "1rem"
+  }
 }));
 
 const UpBar = () => {
@@ -51,6 +50,9 @@ const UpBar = () => {
     <div className={classes.root}>
       <AppBar className={classes.bar} position="static">
         <Toolbar>
+          <div >
+            <img  src={`${logo}`} alt="logo" className={classes.logo}/>
+          </div>
           <Typography variant="subtitle1" className={classes.title}>
             {!user ? null : `Hola ${user.firstName}`}
           </Typography>
@@ -71,9 +73,9 @@ const UpBar = () => {
           </div>
         ) : (
           <Link to={"/login"} className={classes.link}>
-            <Button onClick={() => closeSession()} color="inherit">
-              Salir
-            </Button>
+             <Typography style={{ fontSize: "0.9rem" }}>
+                  Salir
+              </Typography>
           </Link>
         ))} 
         </Toolbar>

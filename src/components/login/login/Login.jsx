@@ -8,13 +8,14 @@ import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles, ThemeProvider } from "@material-ui/core";
+import { Card, makeStyles } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import logo from "../../assets/logocontorno.png";
-import theme from "../../../themeConfig";
+import Paper from "@material-ui/core/Paper";
 import AlertContext from "../../../context/alert/AlertContext";
 import AuthContext from "../../../context/autentication/authContext";
 import Alert from "../../alerts/alerts";
+import BackImg from "../../assets/ryan-de-hamer-WIPIAJW2-P8-unsplash.jpg";
 
 const Copyright = () => {
   return (
@@ -30,6 +31,12 @@ const Copyright = () => {
 };
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    height: "100vh",
+    background: `url(${BackImg})`,
+    backgroundRepeat: "none",
+    backgroundSize: "cover",
+  },
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
@@ -37,11 +44,13 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   logo: {
-    width: "15rem",
+    width: "12rem",
   },
   form: {
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(3),
+    display: "flex",
+    flexDirection: "column",
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -49,11 +58,17 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: "#ffcc29",
     },
+    // width:"60%",
   },
   link: {
     textDecoration: "none",
     color: "#373435",
     marginBottom: "40px",
+  },
+  copy: {
+    textDecoration: "none",
+    color: "#373435",
+    marginTop: "70px",
   },
 
   input: {
@@ -155,76 +170,93 @@ export default function SignIn(props) {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div className={classes.paper}>
-          <Box mb={2}>
-            <img className={classes.logo} src={`${logo}`} alt="logo" />
-          </Box>
-          <Typography component="h1" variant="h5">
-            Iniciar Sesión
-          </Typography>
-          <form className={classes.form} onSubmit={onSubmit}>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              className={classes.input}
-              required
-              fullWidth
-              id="email"
-              label="Email"
-              name="email"
-              value={email}
-              onChange={onChange}
-            />
-            <TextField
-              className={classes.input}
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              value={password}
-              onChange={onChange}
-            />
-            <FormControlLabel
-              control={<Checkbox checked={remember} />}
-              label="Recordarme"
-              className={classes.input}
-              onChange={handleChange}
-              type="input"
-            />
-            {alert ? <Alert alert={alert.msg} /> : null}
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              className={classes.submit}
+    <Grid container component="main" className={classes.root}>
+      <CssBaseline />
+      {/* <Grid container xs={12}> */}
+      <Grid item md={7} />
+      <Grid item xs={12} md={5} component={Paper} elevation={6} square>
+        <Container component="main">
+          <CssBaseline />
+          <div className={classes.paper}>
+            <Box mb={2}>
+              <img className={classes.logo} src={`${logo}`} alt="logo" />
+            </Box>
+            <Card
+            elevation={3}
+              style={{
+                width: "60%",
+                padding: "0.5rem",
+                textAlign: "center",
+                borderRadius: "0.4rem",
+                // backgroundColor: "#eceff1",
+              }}
             >
-              Entrar
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link to="#" variant="body2" className={classes.link}>
-                  Olvidaste tu contraseña?
-                </Link>
+              <Typography component="h1" variant="h6">
+                Iniciar Sesión
+              </Typography>
+            </Card>
+
+            <form className={classes.form} onSubmit={onSubmit}>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                className={classes.input}
+                required
+                fullWidth
+                id="email"
+                label="Email"
+                name="email"
+                value={email}
+                onChange={onChange}
+              />
+              <TextField
+                className={classes.input}
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                value={password}
+                onChange={onChange}
+              />
+              <FormControlLabel
+                control={<Checkbox checked={remember} />}
+                label={<Typography variant="body2">Recordarme</Typography>}
+                className={classes.input}
+                onChange={handleChange}
+                type="input"
+              />
+              {alert ? <Alert alert={alert.msg} /> : null}
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                className={classes.submit}
+              >
+                Entrar
+              </Button>
+              <Grid container>
+                <Grid item xs={9}>
+                  <Link to="#" variant="body2" className={classes.link}>
+                    Olvidaste tu contraseña?
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Link to="/signup" variant="body2" className={classes.link}>
+                    Crear cuenta
+                  </Link>
+                </Grid>
               </Grid>
-              <Grid item>
-                <Link to="/signup" variant="body2" className={classes.link}>
-                  Crear cuenta
-                </Link>
-              </Grid>
-            </Grid>
-          </form>
-        </div>
-        <Box mt={3}>
-          <Copyright className={classes.link} />
-        </Box>
-      </Container>
-    </ThemeProvider>
+            </form>
+          </div>
+          <Box mt={12}>
+            <Copyright className={classes.copy} />
+          </Box>
+        </Container>
+      </Grid>
+    </Grid>
   );
 }

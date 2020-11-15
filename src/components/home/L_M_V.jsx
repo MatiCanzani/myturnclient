@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState, useEffect } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import Paper from "@material-ui/core/Paper";
 import {
   Divider,
@@ -7,10 +7,13 @@ import {
   ListItemText,
   Typography,
 } from "@material-ui/core";
-import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import turnContext from "../../context/turn/turnContext";
-import Space from "./Space";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -26,11 +29,6 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
-  box: {
-    display: "flex",
-    justifyContent: "space-around",
-    alignItems: "center",
-  },
   title: {
     display: "flex",
     justifyContent: "center",
@@ -38,53 +36,106 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "1.1rem",
     marginTop: "0.6rem",
   },
+
+  flex: {
+    display: "flex",
+    flexDirection: "row"
+  },
+  row:{
+    '&:hover': {
+      backgroundColor: '#00ss00',    
+    },
+  }
 }));
 
-const ClassList = () => {
+const MWF = ({ savedDays, disabled }) => {
   const classes = useStyles();
 
-  const classTurnContext = useContext(turnContext);
-  const {
-    hours,
-    getHours,
-  } = classTurnContext;
+  const [value, setValue] = useState("");
+  const [selection, setSelection] = useState({
+    days: "",
+    hour: value,
+  });
 
+  const classTurnContext = useContext(turnContext);
+  const { hours } = classTurnContext;
+  // useEffect(() => {
+  //   getHours();
+  //   // eslint-disable-next-line
+  // }, []);
 
   useEffect(() => {
-    getHours();
-    // eslint-disable-next-line
-  }, []);
-  
+    savedDays(selection);
+      // eslint-disable-next-line
+  }, [selection]);
 
- 
+  const handleClick = (event) => {
+    if (event.target.value === value) {
+      setValue("");
+      setSelection({
+        days: "",
+        hour: value,
+      })
+    } else {
+      setValue(event.target.value);
+    setSelection({
+      days: "Lunes / Miércoles / Viernes",
+      hour: event.target.value,
+    });
+  }
+  };
+
   return (
     <Fragment>
       <Paper className={classes.paper}>
-        <Grid item xs={12}>
-          <Typography className={classes.title}>
-            Lunes / Miércoles / Viernes
-          </Typography>
-          <div>
-            <List>
-               {hours.map((hour, i) => (
-                 <div>
-              <ListItem key={i} id={hour.hour} className={classes.box}>
-                {hour.hour}
-              <Space hour={hour.hour}/>
-              </ListItem>
-              
-               <Divider />
-              
-               </div>
-               
-            ))}
-          
-             </List>
-          </div>
-        </Grid>
+          <FormControl component="fieldset" className={classes.row}>
+            <FormLabel component="legend" style={{paddingTop: "1.5rem"}} align="center">
+              Lunes / Miércoles / Viernes
+            </FormLabel>
+            <RadioGroup
+              name="Lunes / Miércoles / Viernes"
+              value={value}
+            >
+              <Fragment>
+                <List>
+                  {hours.map((hour) => (
+                    <Fragment key={hour.hours}>
+                      {hour.space === 19 ? null : (
+                        <Fragment>
+                          <ListItem
+                            
+                          >
+                            <ListItemText  >
+                              <FormControlLabel
+                                value={hour.hours}
+                                control={<Radio onClick={handleClick} disabled={disabled} />}
+                                label={
+                                  <Typography variant="body2">
+                                    {hour.hours}
+                                  </Typography>
+                                }
+                              />
+                              </ListItemText>
+                              <ListItemText>
+                              <Typography variant="body2" >
+                                {19 - hour.space} disponibles.
+                              </Typography>
+                              
+                            </ListItemText>
+                          </ListItem>
+                          <Divider />
+                        </Fragment>
+                      )}
+                    </Fragment>
+                  ))}
+                </List>
+              </Fragment>
+            </RadioGroup>
+          </FormControl>
+
       </Paper>
     </Fragment>
   );
 };
 
-export default ClassList;
+export default MWF;

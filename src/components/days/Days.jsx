@@ -5,13 +5,13 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import { makeStyles } from "@material-ui/core/styles";
 import { Container, Icon, Typography } from "@material-ui/core";
-import Calendar from '@material-ui/icons/DateRange';
+import Calendar from "@material-ui/icons/DateRange";
 
 const useStyles = makeStyles(() => ({
-    title: {
-      color: "#373435",
-      textAlign: "center",
-    },
+  title: {
+    color: "#373435",
+    textAlign: "center",
+  },
   cntr: {
     padding: "1rem",
     display: "flex",
@@ -27,7 +27,6 @@ const useStyles = makeStyles(() => ({
     alignItems: "center",
     justifyContent: "center",
     marginTop: "1rem",
-    
   },
   subTitle: {
     color: "#373435",
@@ -53,10 +52,12 @@ const DaysOptions = ({ savedDays }) => {
       <FormControl component="fieldset">
         <Fragment>
           <div className={classes.flex}>
-           <Icon>
-              <Calendar style={{color: "#373435"}} />
+            <Icon>
+              <Calendar style={{ color: "#373435" }} />
             </Icon>
-            <Typography  variant="h6" className={classes.subTitle}>&nbsp;Selecciona los días</Typography>
+            <Typography variant="h6" className={classes.subTitle}>
+              &nbsp;Selecciona los días
+            </Typography>
           </div>
         </Fragment>
         <RadioGroup aria-label="days" value={days} onChange={handleChange}>
@@ -69,9 +70,17 @@ const DaysOptions = ({ savedDays }) => {
           />
           <FormControlLabel
             className="subtitle"
-            value="Martes / Jueves / Sábados"
+            value="Martes / Jueves"
             control={<Radio />}
-            label="Martes / Jueves / Sábados"
+            label="Martes / Jueves"
+            name="days"
+          />
+
+          <FormControlLabel
+            className="subtitle"
+            value="Sábado"
+            control={<Radio />}
+            label="Sábado"
             name="days"
           />
         </RadioGroup>

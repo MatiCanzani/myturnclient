@@ -30,14 +30,13 @@ const HourOption = ({ savedHours }) => {
   const [hour, setHour] = useState(0);
 
   const classTurnContext = useContext(turnContext);
-  const { getHours, hours } = classTurnContext;
+  const { showHour, showHours } = classTurnContext;
 
   useEffect(() => {
-    getHours();
+    showHour();
     // eslint-disable-next-line
   }, []);
 
-  console.log(hours);
   const handleChange = (e) => {
     setHour(e.target.value);
   };
@@ -67,7 +66,7 @@ const HourOption = ({ savedHours }) => {
           }}
         >
           <option aria-label="None" value="" />
-          {hours.map((hour) => (
+          {showHours.map((hour) => (
             <option key={hour._id} value={hour.hour}>
               {hour.hour}
             </option>

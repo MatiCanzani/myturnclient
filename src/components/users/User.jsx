@@ -1,12 +1,12 @@
-import React, { Fragment, useContext, useEffect, useState} from "react";
+import React, {  useContext, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Box, Container } from "@material-ui/core";
+import { Container} from "@material-ui/core";
 import UserForm from "../turnForms/userform/UserForm";
 import AuthContext from "../../context/autentication/authContext";
 import turnContext from "../../context/turn/turnContext";
 import UserNoActive from "./userCard/UserNoActive";
 import UserConfirm from "../users/UserConfirm"
-import Spinner from "../spinner/Spinner"
+
 
 const useStyles = makeStyles(() => ({
   userCardCntr: {
@@ -21,43 +21,41 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Turns = (props) => {
-
-
-  //get authentication info
+const Turns = () => {
 
   // const [loading, setLoading]  = useState(false);
-
+  //get authentication info
   const authContext = useContext(AuthContext);
-  const { user, userAuthenticated} = authContext;
+  const { user } = authContext;
 
   const classTurnContext = useContext(turnContext);
-  const {userTurn} = classTurnContext;
+  const {userTurn, getHours } = classTurnContext;
+
+  // useEffect(() => {
+  //   userAuthenticated();
+  //    // eslint-disable-next-line
+  // }, []);
 
   useEffect(() => {
-    userAuthenticated();
+    getHours();
     // eslint-disable-next-line
   }, []);
-  
 
+
+  
   const classes = useStyles();
   return (
-    <Fragment>
-      {/* <UpBar /> */}
-      <Container className={classes.userCardCntr}>
-        <Box className={classes.cntr}>
+      <Container className={classes.userCardCntr}> 
           {!user
             ? null
-            : (user.isActive === false ? (
-                <UserNoActive />
-              ) :           
-              (!userTurn) ? (
-                <UserForm />
-                ): (<UserConfirm />))
-              }
-        </Box>
-      </Container>
-    </Fragment>
+            : user.isActive === false ? 
+               ( <UserNoActive />)
+               :      
+              !userTurn ? 
+                (<UserForm />)
+                : (<UserConfirm />)
+            }
+      </Container> 
   );
 };
 

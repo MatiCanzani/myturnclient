@@ -3,13 +3,18 @@ import turnContext from "./turnContext";
 import turnReducer from "./turnReducer";
 import {
   SHOW_DAYS,
-  SHOW_HOURS,
   SHOW_USER_LIST,
   GET_USERS_TURNS,
   CREATE_USER_TURNS,
   DELETE_TURN,
   GET_USERS_TURNS_BY_ID,
-  SHOW_SPACE
+  SHOW_SPACE,
+  SHOW_HOURS,
+  GET_HOURS,
+  SHOW_THUSHOURS,
+  GET_THUSHOURS,
+  SHOW_SATHOURS,
+  GET_SATHOURS, 
 } from "../../types/index";
 import axios from "../../config/axios";
 
@@ -17,11 +22,16 @@ const TurnState = (props) => {
   const initialState = {
     userTurns: [],
     newTurn: false,
-    userTurn: [],
+    userTurn: null,
     loading: true,
     days: [],
-    hours: [],
-    space: []
+    hours: null,
+    thusHours: null,
+    satHours: null,
+    showHours: [],
+    showThusHours: [],
+    showSatHours: [],
+    space: [],
   };
 
   const [state, dispatch] = useReducer(turnReducer, initialState);
@@ -51,6 +61,7 @@ const TurnState = (props) => {
   const getUserTurnsById = async (userId) => {
     try {
       const reply = await axios.get(`/turns/${userId}`);
+      console.log(reply)
       dispatch({
         type: GET_USERS_TURNS_BY_ID,
         payload: reply.data.userTurn,
@@ -68,7 +79,6 @@ const TurnState = (props) => {
         type: CREATE_USER_TURNS,
         payload: reply.data,
       });
-      console.log(reply.data);
     } catch (error) {
       console.log(error);
     }
@@ -91,6 +101,7 @@ const TurnState = (props) => {
   const getDays = async () => {
     try {
       const reply = await axios.get("/days");
+
       dispatch({
         type: SHOW_DAYS,
         payload: reply.data,
@@ -100,10 +111,22 @@ const TurnState = (props) => {
     }
   };
   const getHours = async () => {
+    console.log();
     try {
       const reply = await axios.get("/hours");
       dispatch({
-        type:  SHOW_HOURS,
+        type: SHOW_HOURS,
+        payload: reply.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const getHoursThus = async () => {
+    try {
+      const reply = await axios.get("/hours/thus");
+      dispatch({
+        type: SHOW_THUSHOURS,
         payload: reply.data,
       });
     } catch (error) {
@@ -111,15 +134,56 @@ const TurnState = (props) => {
     }
   };
 
-  const getSpace = async (turns) => {
-
+  const getHoursSat = async () => {
     try {
-      const reply = await axios.get("/turns/userCount",{
-        params: turns,
-      }
-     
-      );
-      console.log(reply.data)
+      const reply = await axios.get("/hours/sat");
+      dispatch({
+        type: SHOW_SATHOURS,
+        payload: reply.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const showSatHour = async () => {
+    try {
+      const reply = await axios.get("/hours/showSatHour");
+      dispatch({
+        type: GET_SATHOURS,
+        payload: reply.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const showHour = async () => {
+    try {
+      const reply = await axios.get("/hours/showHour");
+      dispatch({
+        type: GET_HOURS,
+        payload: reply.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const showThusHour = async () => {
+    try {
+      const reply = await axios.get("/hours/showThusHour");
+      dispatch({
+        type: GET_THUSHOURS,
+        payload: reply.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getSpace = async (classHour) => {
+    try {
+      const reply = await axios.get("/turns/userCount", {
+        params: classHour,
+      });
       dispatch({
         type: SHOW_SPACE,
         payload: reply.data,
@@ -127,7 +191,7 @@ const TurnState = (props) => {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   return (
     <turnContext.Provider
@@ -138,7 +202,12 @@ const TurnState = (props) => {
         loading: state.loading,
         days: state.days,
         hours: state.hours,
+        satHours: state.satHours,
+        thusHours: state.thusHours,
         space: state.space,
+        showHours: state.showHours,
+        showThusHours: state.showThusHours,
+        showSatHours: state.showSatHours,
         showUserList,
         getUserTurns,
         createUserTurns,
@@ -146,7 +215,12 @@ const TurnState = (props) => {
         getUserTurnsById,
         getDays,
         getHours,
+        getHoursThus,
+        getHoursSat,
         getSpace,
+        showSatHour,
+        showHour,
+        showThusHour,
       }}
     >
       {props.children}

@@ -1,33 +1,32 @@
-import React, { Fragment, useState, useContext, useEffect } from "react";
-import Hours from "../../hours/hour/Hours";
-import SatudayHourOptions from "../../hours/sathours/SaturdayHours";
-import DaysOptions from "../../days/Days";
-import { Button, Box, Typography } from "@material-ui/core";
+import React, { useState, useContext, useEffect, Fragment } from "react";
+import { Button, Box, Typography, Grid, Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Icon from "@material-ui/core/Icon";
 import AlertContext from "../../../context/alert/AlertContext";
 import Alert from "../../alerts/alerts";
 import turnContext from "../../../context/turn/turnContext";
-import Watch from "@material-ui/icons/AccessTime";
-import Swal from "sweetalert2";
+import Swal from "sweetalert2/src/sweetalert2.js";
+import withReactContent from "sweetalert2-react-content";
 import { useHistory } from "react-router-dom";
-import Spinner from "../../spinner/Spinner";
+import MWF from "../../home/L_M_V";
+import TT from "../../home/M_J";
+import SAT from "../../home/S";
+import Spinner from "../../spinner/Spinner"
+
+
 
 const useStyles = makeStyles(() => ({
   flex: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    flexDirection: "column",
   },
   text: {
     color: "#373435",
     textAlign: "center",
   },
   button: {
-    backgroundColor: "#1e1c1d",
-    "&:hover": {
-      backgroundColor: "#373435",
-    },
     margin: "1rem 0px",
     color: "#ffffff",
   },
@@ -47,7 +46,10 @@ const useStyles = makeStyles(() => ({
     padding: "0.8rem",
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    // Fix IE 11 issue.
   },
   list: {
     display: "flex",
@@ -58,112 +60,188 @@ const useStyles = makeStyles(() => ({
     color: "#373435",
     margin: " 1rem ",
   },
+  card: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "column",
+    margin: "16px 8px",
+  },
+  block: {
+    backgroundColor: "red",
+    height: "100%",
+    wide: "100%",
+    zIndex: 9999,
+    position: "relative",
+  },
 }));
 
+const MySwal = withReactContent(Swal);
 const TurnSelector = () => {
   const history = useHistory();
   const classes = useStyles();
   const [userSelection, setUserSelection] = useState(0);
-  const [showResults, setShowResults] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [userSatSelection, setUserSatSelection] = useState(0);
+
 
   const [days, savedDays] = useState(0);
-  const [hours, savedHours] = useState(0);
-  const [satHours, savedSatHours] = useState(0);
+  // const [hours, savedHours] = useState(0);
+  const [satDays, savedSatDays] = useState(0);
+
+  const [disabled, setDisabled] = useState(false);
+  const [disabled2, setDisabled2] = useState(false);
 
   // Get initial state from userTurns
   const classTurnContext = useContext(turnContext);
-  const {
-    createUserTurns,
-    getUserTurns,
-
-    userTurns,
-  } = classTurnContext;
+  const { createUserTurns, hours, satHours, thusHours, getHours, getHoursThus, getHoursSat } = classTurnContext;
 
   const alertContext = useContext(AlertContext);
   const { alert, showAlert } = alertContext;
 
   useEffect(() => {
-    if (days === "Lunes / Miércoles / Viernes") {
+    console.log(satDays);
+    if (days.days === "") {
+      setDisabled(false);
+      setDisabled2(false);
+    }
+
+    if (days.days === "Lunes / Miércoles / Viernes") {
       setUserSelection({
-        userDay: days,
-        userHours: hours,
+        userDay: days.days,
+        userHours: days.hour,
         userSatHours: 0,
       });
-    } else {
-      setUserSelection({
-        userDay: days,
-        userHours: hours,
-        userSatHours: satHours,
-      });
+      setDisabled2(true);
     }
-  }, [days, hours, satHours]);
+    if (days.days === "Martes / Jueves") {
+      setUserSelection({
+        userDay: days.days,
+        userHours: days.hour,
+        userSatHours: 0,
+      });
+      setDisabled(true);
+    }
+    if (satDays.days === "Sábado") {
+      setUserSatSelection({
+        userDay: satDays.days,
+        userHours: 0,
+        userSatHours: satDays.hour,
+      });
+      setDisabled(true);
+    }
+  }, [days, satDays]);
 
   //
+  useEffect(() => {
+    getHoursThus();
+    // eslint-disable-next-line
+  }, []);
+  useEffect(() => {
+    getHours();
+    // eslint-disable-next-line
+  }, []);
+  useEffect(() => {
+    getHoursSat();
+    // eslint-disable-next-line
+  }, []);
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (days === 0) {
+    if (days.days === 0) {
       showAlert("Debes seleccionar un día");
-    } else if (hours === 0) {
+    } else if (days.hour === 0) {
       showAlert("Debes seleccionar un horario");
     }
 
-    if (days === "Martes / Jueves / Sábados" && days === 0) {
+    if (days.days === "Martes / Jueves " && days.days === 0) {
       showAlert("Debes seleccionar un día");
     } else if (
-      days === "Martes / Jueves / Sábados" &&
-      hours !== 0 &&
-      satHours === 0
+      days.days === "Martes / Jueves" &&
+      days.hour !== 0 &&
+      days.satDays === 0
     ) {
       showAlert("Debes seleccionar un horario para los sabados");
     }
 
-    setLoading(true);
+    // setLoading(true);
     setUserSelection({
-      userDay: days,
-      userHours: hours,
-      userSatHours: satHours,
+      userDay: days.days,
+      userHours: days.hour,
+      userSatDays: 0,
     });
-    getUserTurns(userSelection);
-    setShowResults(true);
-    setTimeout(() => {
-      setShowResults(true);
-      setLoading(false);
-    }, 600);
-  };
 
-  const showSpaces = () => {
-    if (showResults) {
-      return (
-        <div className={classes.list}>
-          <Typography className={classes.available}>
-            Lugares disponibles: {19 - userTurns.length}
-          </Typography>
-          <Button
-            onClick={() => reserve()}
-            color="secondary"
-            className="del-btn"
-            variant="contained"
-            size="small"
-          >
-            Reservar
-          </Button>
-        </div>
-      );
-    }
+    setUserSatSelection({
+      userDay: satDays.days,
+      userHours: 0,
+      userSatHours: satDays.hour,
+    });
+    // getUserTurns(userSelection);
+
+    //setShowResults(true);
+    //setTimeout(() => {
+    //setShowResults(true);
+    //setLoading(false);
+    //}, 600);
   };
 
   const reserve = () => {
+    console.log(days);
+    console.log(satDays);
     console.log(userSelection);
-    if (days !== "Lunes / Miércoles / Viernes") {
-      Swal.fire({
-        title: "Tu selección es: ",
-        text: `Martes / Jueves : ${hours} hs Sábados: ${satHours} hs`,
+    console.log(userSatSelection);
+    if (days.days !== "Lunes / Miércoles / Viernes") {
+      MySwal.fire({
+       
+        html: (
+          <Fragment>
+             <Typography variant="h5" style={{marginBottom: "1rem"}}>
+             Tu selección es: 
+            </Typography>
+            <Typography variant="body1">
+              {days.days} :{days.hour} hs,
+            </Typography>
+            {""}
+            <Typography variant="body1">
+              {satDays.days} : {satDays.hour} hs
+              </Typography>
+          </Fragment>
+        ),
         icon: "warning",
         showCancelButton: true,
-        cancelButtonColor: "#d33",
-        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#f44336",
+        confirmButtonColor: "#3f51b5",
+        confirmButtonText: "Sí, Reservar!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          createUserTurns(userSelection);
+          createUserTurns(userSatSelection);
+          Swal.fire({
+            title: "Reserva realizada con éxito!",
+            icon: "success",
+            confirmButtonColor: "#3f51b5",
+          }).then(function (result) {
+            if (result.value) {
+              history.push("/confirm");
+            }
+          });
+        }
+      });
+    } else {
+      MySwal.fire({   
+        html: (
+          <Fragment>
+             <Typography variant="h5" style={{marginBottom: "1rem"}}>
+             Tu selección es: 
+            </Typography>
+            <Typography variant="body1">
+              {days.days} :{days.hour} hs,
+            </Typography>
+          </Fragment>
+        ),
+        icon: "warning",
+        showCancelButton: true,
+        cancelButtonColor: "#f44336",
+        confirmButtonColor: "#3f51b5",
         confirmButtonText: "Sí, Reservar!",
       }).then((result) => {
         if (result.isConfirmed) {
@@ -171,30 +249,7 @@ const TurnSelector = () => {
           Swal.fire({
             title: "Reserva realizada con éxito!",
             icon: "success",
-            confirmButtonColor: "#3085d6",
-          }).then(function (result) {
-            if (result.value) {
-              history.push("/confirm");
-            }
-          });
-        }
-      });
-    } else {
-      Swal.fire({
-        title: "Tu selección es: ",
-        text: `${days}: ${hours} hs`,
-        icon: "warning",
-        showCancelButton: true,
-        cancelButtonColor: "#d33",
-        confirmButtonColor: "#3085d6",
-        confirmButtonText: "Sí, reservar!",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          createUserTurns(userSelection);
-          Swal.fire({
-            title: "Reserva realizada con éxito!",
-            icon: "success",
-            confirmButtonColor: "#3085d6",
+            confirmButtonColor: "#3f51b5",
           }).then(function (result) {
             if (result.value) {
               history.push("/confirm");
@@ -205,68 +260,116 @@ const TurnSelector = () => {
     }
   };
 
-  return (
-    <div className={classes.flex}>
-      <Box className={classes.paper}>
-        <Box elevation={3} className={classes.box}>
-          <Typography variant="h6" className={classes.title}>
-            Selecciona Días y Horarios
+  const TueThuSat = () => {
+    console.log(days.hour);
+    if (days.days === "") {
+      return (
+        <Box style={{ margin: "1rem" }}>
+          {" "}
+          <Typography variant="subtitle1" align="center" color="primary">
+            {" "}
+            Debes seleccionar un turno
           </Typography>
         </Box>
-        <form onSubmit={handleSubmit} className={classes.form}>
-          <DaysOptions savedDays={savedDays} />
-          {days === 0 || days === "Lunes / Miércoles / Viernes" ? (
-            <Fragment>
-              <div className={classes.flex}>
-                <Icon>
-                  <Watch style={{ color: "#373435" }} />
-                </Icon>
-                <Typography variant="h6" className={classes.subTitle}>
-                  {" "}
-                  &nbsp;Selecciona el horario
-                </Typography>
-              </div>
-              <Hours savedHours={savedHours} />
-            </Fragment>
+      );
+    }
+    if (days.days !== "Lunes / Miércoles / Viernes") {
+      return (
+        <Box style={{ margin: "1rem" }}>
+          {" "}
+          <Typography color="primary" variant="subtitle1">
+            {" "}
+            Días : {days.days}
+          </Typography>
+          <Typography color="primary" variant="subtitle1">
+            {" "}
+            Horario: {days.hour} hs{" "}
+          </Typography>
+          {satDays.days === "" ? (
+            <Typography color="secondary" variant="subtitle1">
+              Falta seleccionar el Sábado
+            </Typography>
           ) : (
             <Fragment>
-              <div className={classes.flex}>
-                <Icon>
-                  <Watch style={{ color: "#373435" }} />
-                </Icon>
-                <Typography variant="h6" className={classes.subTitle}>
-                  &nbsp;Selecciona el horario
-                </Typography>
-              </div>
-              <Hours savedHours={savedHours} />
-              <div className={classes.flex}>
-                <Icon>
-                  <Watch style={{ color: "#373435" }} />
-                </Icon>
-                <Typography variant="h6" className={classes.subTitle}>
-                  &nbsp;Sábados
-                </Typography>
-              </div>
-              <SatudayHourOptions savedSatHours={savedSatHours} />
+              <Typography color="primary" variant="subtitle1">
+                Días : {satDays.days}
+              </Typography>
+              <Typography color="primary" variant="subtitle1">
+                Horario: {satDays.hour} hs.{" "}
+              </Typography>
             </Fragment>
           )}
-          <div>{alert ? <Alert alert={alert.msg} /> : null}</div>
-          <div className={classes.flex}>
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.button}
-              endIcon={<Icon>send</Icon>}
-              type="submit"
-            >
-              Consultar
-            </Button>
-          </div>
+        </Box>
+      );
+    } else {
+      return (
+        <Box style={{ margin: "1rem" }}>
+          {" "}
+          <Typography color="primary" variant="subtitle1">
+            {" "}
+            Días : {days.days}
+          </Typography>
+          <Typography color="primary" variant="subtitle1">
+            {" "}
+            Horario: {days.hour} hs{" "}
+          </Typography>
+        </Box>
+      );
+    }
+  };
 
-          {loading ? <Spinner /> : showSpaces()}
-        </form>
+  return (
+    <Grid container component="main" className={classes.flex}>
+      <Box elevation={3} className={classes.paper}>
+      <Typography align="center" variant="h5">
+          Clases y Lugares Disponibles
+        </Typography>
+        <Typography align="center" variant="h6">
+          Selecciona Días y Horarios
+        </Typography>
       </Box>
-    </div>
+
+      {!hours || !satHours || !thusHours ?
+      (<Spinner />) :
+      (
+        <form onSubmit={handleSubmit} className={classes.form}>
+        <Grid container >
+          <Grid item xs={12} md={3}>
+            <MWF savedDays={savedDays} disabled={disabled} />
+          </Grid>
+
+          <Grid item xs={12} md={3}>
+            <TT savedDays={savedDays} disabled={disabled2} />
+          </Grid>
+          <Grid item xs={12} md={3}>
+            <SAT savedSatDays={savedSatDays} disabled={disabled2} />
+          </Grid>
+
+          <div>{alert ? <Alert alert={alert.msg} /> : null}</div>
+
+          <Grid item xs={12} md={3}>
+            <Paper elevation={3} className={classes.card}>
+              <Typography variant="h6" component={"h1"} align="center">
+                {" "}
+                Tu Selección:{" "}
+              </Typography>
+              <Typography>{TueThuSat()}</Typography>
+              <Button
+                onClick={() => reserve()}
+                color="secondary"
+                variant="contained"
+                endIcon={<Icon>send</Icon>}
+                type="submit"
+                className={classes.button}
+              >
+                Reservar
+              </Button>
+            </Paper>
+          </Grid>
+        </Grid>
+      </form>
+      )}
+    </Grid>
   );
 };
 

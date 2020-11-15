@@ -1,12 +1,18 @@
 import {
   SHOW_DAYS,
-  SHOW_HOURS,
   SHOW_USER_LIST,
   GET_USERS_TURNS,
   CREATE_USER_TURNS,
   DELETE_TURN,
   GET_USERS_TURNS_BY_ID,
-  SHOW_SPACE
+  SHOW_SPACE,
+  SHOW_THUSHOURS,
+  SHOW_SATHOURS,
+  SHOW_HOURS,
+  GET_THUSHOURS,
+  GET_SATHOURS,
+  GET_HOURS,
+  
 } from "../../types/index";
 
 const turnReducer = (state, action) => {
@@ -49,7 +55,21 @@ const turnReducer = (state, action) => {
         days: action.payload,
         // loading: false,
       };
-
+    case SHOW_THUSHOURS:
+      console.log(action.payload)
+      return {
+        ...state,
+        thusHours: action.payload,
+        // loading: false,
+      };
+    case SHOW_SATHOURS:
+      console.log(action.payload)
+      return {
+        ...state,
+        satHours: action.payload,
+        // loading: false,
+      };
+    
     case SHOW_HOURS:
       return {
         ...state,
@@ -57,11 +77,33 @@ const turnReducer = (state, action) => {
         // loading: false,
       };
 
-      case SHOW_SPACE:
+      case GET_THUSHOURS:
+        console.log(action.payload)
+        return {
+          ...state,
+          showThusHours: action.payload,
+          // loading: false,
+        };
+  
+      case GET_SATHOURS:
+        console.log(action.payload)
+        return {
+          ...state,
+          showSatHours: action.payload,
+          // loading: false,
+        };
+      
+      case GET_HOURS:
+        return {
+          ...state,
+          showHours: action.payload,
+          // loading: false,
+        };
+
+    case SHOW_SPACE:
       return {
         ...state,
         space: action.payload,
-     
       };
 
     default:

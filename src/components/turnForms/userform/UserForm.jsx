@@ -185,10 +185,7 @@ const TurnSelector = () => {
   };
 
   const reserve = () => {
-    console.log(days);
-    console.log(satDays);
-    console.log(userSelection);
-    console.log(userSatSelection);
+
     if (days.days !== "Lunes / Miércoles / Viernes") {
       MySwal.fire({
        
@@ -215,8 +212,14 @@ const TurnSelector = () => {
         if (result.isConfirmed) {
           createUserTurns(userSelection);
           createUserTurns(userSatSelection);
-          Swal.fire({
-            title: "Reserva realizada con éxito!",
+          MySwal.fire({
+            html: (
+              <Fragment>
+                 <Typography variant="h5" style={{marginBottom: "1rem"}}>
+                 "Reserva realizada con éxito!
+                </Typography>
+              </Fragment>
+            ),
             icon: "success",
             confirmButtonColor: "#3f51b5",
           }).then(function (result) {
@@ -246,8 +249,14 @@ const TurnSelector = () => {
       }).then((result) => {
         if (result.isConfirmed) {
           createUserTurns(userSelection);
-          Swal.fire({
-            title: "Reserva realizada con éxito!",
+          MySwal.fire({
+            html: (
+              <Fragment>
+                 <Typography variant="h5" style={{marginBottom: "1rem"}}>
+                 "Reserva realizada con éxito!
+                </Typography>
+              </Fragment>
+            ),
             icon: "success",
             confirmButtonColor: "#3f51b5",
           }).then(function (result) {

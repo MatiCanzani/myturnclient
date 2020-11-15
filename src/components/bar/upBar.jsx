@@ -73,10 +73,12 @@ const UpBar = () => {
           </div>
         ) : (
           <Link to={"/login"} className={classes.link}>
-             <Typography style={{ fontSize: "0.9rem" }}>
+              <Button onClick={() => closeSession()} color="inherit">
+                <Typography style={{ fontSize: "0.7rem" }}>
                   Salir
-              </Typography>
-          </Link>
+                </Typography>
+              </Button>
+            </Link>
         ))} 
         </Toolbar>
       </AppBar>

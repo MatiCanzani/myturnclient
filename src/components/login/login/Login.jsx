@@ -113,15 +113,22 @@ export default function SignIn(props) {
   const { alert, showAlert } = alertContext;
 
   const authContext = useContext(AuthContext);
-  const { message, userLogin, user } = authContext;
+  const { message, userLogin, user, token } = authContext;
 
   const [remember, setRemember] = useState(false);
 
   //get info from context
   const isLogged = localStorage.getItem("logedIn");
 
+// useEffect(() => {
+//   userAuthenticated()
+//      //eslint-disable-next-line
+// }, [])
+
+const logedStatus = JSON.parse(isLogged);
   useEffect(() => {
-    const logedStatus = JSON.parse(isLogged);
+  //   const logedStatus = JSON.parse(isLogged);
+    console.log(logedStatus)
     setRemember(logedStatus);
     localStorage.setItem("logedIn", remember);
     //eslint-disable-next-line
@@ -169,10 +176,9 @@ export default function SignIn(props) {
     localStorage.setItem("logedIn", remember);
   };
 
+   if(token) return null; 
   return (
     <Grid container component="main" className={classes.root}>
-      <CssBaseline />
-      {/* <Grid container xs={12}> */}
       <Grid item md={7} />
       <Grid item xs={12} md={5} component={Paper} elevation={6} square>
         <Container component="main">
@@ -259,4 +265,4 @@ export default function SignIn(props) {
       </Grid>
     </Grid>
   );
-}
+  }

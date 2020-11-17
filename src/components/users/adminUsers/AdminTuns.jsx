@@ -4,8 +4,8 @@ import {
   Container,
   Grid,
   CssBaseline,
-  Paper,
   Typography,
+  Card
 } from "@material-ui/core";
 import AdminForm from "../../turnForms/adminform/AdminForm";
 import AuthContext from "../../../context/autentication/authContext";
@@ -53,13 +53,12 @@ const AdminTurns = ({ id }) => {
       {/* <UpBar /> */}
       <Container component="main" maxWidth="sm">
         <CssBaseline />
-        
         <Grid container spacing={2} className={classes.formCntr} sm={12}>
-          <Paper elevation={3} className={classes.box}>
+          <Card elevation={3} className={classes.box}>
             <Typography variant="h5" className={classes.title}>
               Control de Clases
             </Typography>
-          </Paper>
+          </Card>
           <Grid item xs={12} sm={12}>
             <AdminForm />
           </Grid>

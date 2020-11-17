@@ -27,8 +27,10 @@ const authReducer =  (state, action) => {
         case CLOSE_SESSION:    
         case LOGIN_ERROR:
         case REGISTER_ERROR:
+            localStorage.removeItem('token');
             return {
                 ...state,
+                token: null,
                 isAdmin: null,
                 authentication:  null,
                 user: null,

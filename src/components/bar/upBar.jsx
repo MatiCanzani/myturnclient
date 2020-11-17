@@ -32,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
   logo: {
     width:"100px",
     marginRight: "1rem"
+  },
+  flex: {
+    display: "flex",
   }
 }));
 
@@ -61,7 +64,7 @@ const UpBar = () => {
           ? null 
           :( user.isAdmin === true ? 
             (
-          <div>
+          <div className={classes.flex}>
             <Burguer />
             <Link to={"/login"} className={classes.link}>
               <Button onClick={() => closeSession()} color="inherit">

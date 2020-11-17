@@ -71,7 +71,7 @@ const User = ({ user }) => {
         deleteUserById(id);
         Swal.fire(
           "Eliminado!",
-          "El usuario fue removido de la clase.",
+          "El usuario fue removido",
           "success"
         ).then(function (result) {
           if (result.value) {

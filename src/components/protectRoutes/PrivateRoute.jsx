@@ -5,7 +5,7 @@ import AuthContext from '../../context/autentication/authContext.js';
 const PrivateRourte = ({ component: Component, ...props}) =>{
     
     const authContext = useContext(AuthContext);
-    const { authentication, userAuthenticated } = authContext
+    const {  userAuthenticated, user } = authContext
     
     useEffect(()=> {
         userAuthenticated();
@@ -13,7 +13,7 @@ const PrivateRourte = ({ component: Component, ...props}) =>{
     },[])
     return (
 
-        <Route { ...props } render={ props => !authentication ? (
+        <Route { ...props } render={ props => !user ? (
             <Redirect to="/login" />
         ) : (
             <Component {...props} />

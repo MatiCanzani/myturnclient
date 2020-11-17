@@ -210,7 +210,7 @@ const TurnSelector = () => {
             html: (
               <Fragment>
                  <Typography variant="h5" style={{marginBottom: "1rem"}}>
-                 "Reserva realizada con éxito!
+                 Reserva realizada con éxito!
                 </Typography>
               </Fragment>
             ),
@@ -247,7 +247,7 @@ const TurnSelector = () => {
             html: (
               <Fragment>
                  <Typography variant="h5" style={{marginBottom: "1rem"}}>
-                 "Reserva realizada con éxito!
+                 Reserva realizada con éxito!
                 </Typography>
               </Fragment>
             ),

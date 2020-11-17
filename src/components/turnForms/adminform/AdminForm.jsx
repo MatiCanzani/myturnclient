@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useContext, useEffect } from "react";
 import Hours from "../../hours/hour/Hours";
 import DaysOptions from "../../days/Days";
-import { Button, Typography } from "@material-ui/core";
+import { Button, Card, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Icon from "@material-ui/core/Icon";
 import AlertContext from "../../../context/alert/AlertContext";
@@ -9,6 +9,7 @@ import Alert from "../../alerts/alerts";
 import turnContext from "../../../context/turn/turnContext";
 import TurnList from "../../Turns/turnlist/TurnList";
 import Watch from "@material-ui/icons/AccessTime";
+
 
 const useStyles = makeStyles(() => ({
   flex: {
@@ -106,7 +107,6 @@ const TurnSelector = () => {
   const handleSubmit = (e) => {
     console.log(days)
     e.preventDefault();
-    console.log(userTurns)
     if (days === 0) {
       showAlert("Debes seleccionar un día");
     } else if (hours === 0) {
@@ -139,7 +139,7 @@ const TurnSelector = () => {
   console.log(userTurns)
   return (
     <div className={classes.flex}>
-      <div elevation={3} className={classes.paper}>
+      <Card elevation={3} className={classes.paper}>
         <form onSubmit={handleSubmit} className={classes.form}>
           <DaysOptions savedDays={savedDays} />
           {days === 0 || days === "Lunes / Miércoles / Viernes" ? (
@@ -185,7 +185,7 @@ const TurnSelector = () => {
           </div>
           {showResults()}
         </form>
-      </div>
+      </Card>
     </div>
   );
 };

@@ -12,15 +12,14 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: "center",
       textAlign: "center",
     },
-    "& .MuiPaper-root":{
-      backgroungColor: '#d2961e',
-    }
+    "& .MuiPaper-root": {
+      backgroungColor: "#d2961e",
+    },
   },
   btn: {
     color: "#ffff",
   },
-  }
-));
+}));
 
 const MenuButtons = () => {
   const classes = useStyles();

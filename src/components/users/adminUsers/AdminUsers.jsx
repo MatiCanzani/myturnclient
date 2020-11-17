@@ -4,8 +4,8 @@ import {
   Grid,
   CssBaseline,
   Container,
-  Paper,
   Typography,
+   Card
 } from "@material-ui/core";
 import UserSearchForm from "../../userList/UserSearch";
 import UserList from "../../userList/list/UserList";
@@ -62,13 +62,11 @@ const Users = () => {
         <Grid className={classes.flex}>
           <div className={classes.paper}>
             <Grid container spacing={2} className={classes.formCntr}>
-              <Paper elevation={3} className={classes.box}>
+              <Card elevation={3} className={classes.box}>
                 <Typography variant="h5" className={classes.title}>
                   Control Usuarios
                 </Typography>
-              </Paper>
-              {/* <h2 className={classes.title}>Habilitar o eliminar usuarios</h2>  */}
-              {/* <Box className={classes.userList}> */}
+              </Card>
               <Grid item xs={12} sm={12}>
                 <UserSearchForm className={classes.search} />
               </Grid>

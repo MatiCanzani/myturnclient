@@ -5,6 +5,7 @@ import { List, ListItem } from "@material-ui/core";
 import Divider from "@material-ui/core/Divider";
 import { makeStyles } from "@material-ui/core/styles";
 
+
 const useStyles = makeStyles(() => ({
   cntrUsers:{
     display: "flex",
@@ -36,8 +37,7 @@ const UserInfo = () => {
 
   const classes = useStyles();
   return (
-    <List>
-  
+    <List> 
         {userInfo.length === 0 ? (
          <h4 className={classes.subtitle}> 
          "No hay usuarios registrados"

@@ -19,7 +19,7 @@ const useStyles = makeStyles(() => ({
     width: "95%",
     marginBottom: "30px",
   },
-}));
+})); 
 
 const Turns = () => {
 

@@ -66,7 +66,7 @@ const UpBar = () => {
             (
           <div className={classes.flex}>
             <Burguer />
-            <Link to={"/login"} className={classes.link}>
+            <Link to={"/"} className={classes.link}>
               <Button onClick={() => closeSession()} color="inherit">
                 <Typography style={{ fontSize: "0.7rem" }}>
                   Salir
@@ -75,7 +75,7 @@ const UpBar = () => {
             </Link>
           </div>
         ) : (
-          <Link to={"/login"} className={classes.link}>
+          <Link to={"/"} className={classes.link}>
               <Button onClick={() => closeSession()} color="inherit">
                 <Typography style={{ fontSize: "0.7rem" }}>
                   Salir

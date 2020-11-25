@@ -9,6 +9,8 @@ import Alert from "../../alerts/alerts";
 import turnContext from "../../../context/turn/turnContext";
 import TurnList from "../../Turns/turnlist/TurnList";
 import Watch from "@material-ui/icons/AccessTime";
+import SendIcon from '@material-ui/icons/Send';
+
 
 
 const useStyles = makeStyles(() => ({
@@ -177,7 +179,7 @@ const TurnSelector = () => {
             <Button
               variant="contained"
               className={classes.button}
-              endIcon={<Icon>send</Icon>}
+              endIcon={<SendIcon />}
               type="submit"
               >
               Mostras Usuarios

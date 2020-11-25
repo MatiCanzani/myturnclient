@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect, Fragment } from "react";
 import { Button, Box, Typography, Grid, Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import Icon from "@material-ui/core/Icon";
+import SendIcon from '@material-ui/icons/Send';
 import AlertContext from "../../../context/alert/AlertContext";
 import Alert from "../../alerts/alerts";
 import turnContext from "../../../context/turn/turnContext";
@@ -99,7 +99,6 @@ const TurnSelector = () => {
   const { alert, showAlert } = alertContext;
 
   useEffect(() => {
-    console.log(satDays);
     if (days.days === "") {
       setDisabled(false);
       setDisabled2(false);
@@ -264,7 +263,6 @@ const TurnSelector = () => {
   };
 
   const TueThuSat = () => {
-    console.log(days.hour);
     if (days.days === "") {
       return (
         <Box style={{ margin: "1rem" }}>
@@ -361,7 +359,7 @@ const TurnSelector = () => {
                 onClick={() => reserve()}
                 color="secondary"
                 variant="contained"
-                endIcon={<Icon>send</Icon>}
+                endIcon={<SendIcon />}
                 type="submit"
                 className={classes.button}
               >

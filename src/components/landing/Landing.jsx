@@ -69,7 +69,7 @@ const Home = (props) => {
     console.log(isLoged); 
     console.log(userData);
 
-    if (isLoged ) {
+    if (isLoged) {
       if (userData) {
         if (userData.isAdmin === true) {
           props.history.push("/admin");

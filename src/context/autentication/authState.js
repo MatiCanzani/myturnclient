@@ -49,6 +49,7 @@ const AuthState = props => {
         };
         try {
             const reply = await axios.get('/auth')
+            console.log(reply.data)
             dispatch({
                 type: GET_USER,
                 payload: reply.data.user,
@@ -97,10 +98,11 @@ const AuthState = props => {
             //get user
             userAuthenticated();
         } catch (error) {
-            console.log(error);
+           
             const alert = {
                 msg: error.response.data.msg,
             }
+            console.log(alert);
             dispatch({
                 type: LOGIN_ERROR,
                 payload: alert

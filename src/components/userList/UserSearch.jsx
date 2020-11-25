@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import { TextField, Button, CssBaseline, Box } from '@material-ui/core';
-import Icon from '@material-ui/core/Icon';
+import SearchIcon from '@material-ui/icons/Search';
 import userContext from '../../context/user/userContext';
 const useStyles = makeStyles(() => ({
   root: {
@@ -64,7 +64,7 @@ const onSubmit = e => {
         color="primary"
         className={classes.button}
         type="submit"
-      ><Icon className={classes.icon}>search</Icon>
+      >< SearchIcon className={classes.icon}/>
         </Button>
     </form>
     </Box>

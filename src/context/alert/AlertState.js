@@ -11,19 +11,20 @@ const AlertState = props => {
 
     const [ state, dispatch ] = useReducer(alertReducer, initialState);
 
-    const showAlert= (msg,) => {
+    const showAlert= (msg) => {
+        console.log(msg)
         dispatch ({
             type: SHOW_ALERT,
             payload: {
                 msg, 
             } 
         });
-
+   
         setTimeout(() => { // hide alert after 5s.
             dispatch({
                 type: HIDE_ALERT
             })
-        }, 3000)
+        }, 1000)
     }
 
     // pass min 8 characters

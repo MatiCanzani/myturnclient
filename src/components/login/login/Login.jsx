@@ -120,15 +120,15 @@ export default function SignIn(props) {
   //get info from context
   const isLogged = localStorage.getItem("logedIn");
 
-console.log(user)
-// useEffect(() => {
-//   userAuthenticated()
-//      //eslint-disable-next-line
-// }, [])
+  console.log(user);
+  // useEffect(() => {
+  //   userAuthenticated()
+  //      //eslint-disable-next-line
+  // }, [])
 
-const logedStatus = JSON.parse(isLogged);
+  const logedStatus = JSON.parse(isLogged);
   useEffect(() => {
-  //   const logedStatus = JSON.parse(isLogged);
+    //   const logedStatus = JSON.parse(isLogged);
     setRemember(logedStatus);
     localStorage.setItem("logedIn", remember);
     //eslint-disable-next-line
@@ -176,7 +176,7 @@ const logedStatus = JSON.parse(isLogged);
     localStorage.setItem("logedIn", remember);
   };
 
-   if(token) return null; 
+  if (token) return null;
   return (
     <Grid container component="main" className={classes.root}>
       <Grid item md={7} />
@@ -187,20 +187,6 @@ const logedStatus = JSON.parse(isLogged);
             <Box mb={2}>
               <img className={classes.logo} src={`${logo}`} alt="logo" />
             </Box>
-            <Card
-            elevation={3}
-              style={{
-                width: "60%",
-                padding: "0.5rem",
-                textAlign: "center",
-                borderRadius: "0.4rem",
-                // backgroundColor: "#eceff1",
-              }}
-            >
-              <Typography component="h1" variant="h6">
-                Iniciar Sesión
-              </Typography>
-            </Card>
 
             <form className={classes.form} onSubmit={onSubmit}>
               <TextField
@@ -242,7 +228,7 @@ const logedStatus = JSON.parse(isLogged);
                 variant="contained"
                 className={classes.submit}
               >
-                Entrar
+                Iniciar sesión
               </Button>
               <Grid container>
                 <Grid item xs={9}>
@@ -265,4 +251,4 @@ const logedStatus = JSON.parse(isLogged);
       </Grid>
     </Grid>
   );
-  }
+}

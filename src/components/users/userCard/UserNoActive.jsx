@@ -33,7 +33,6 @@ const useStyles = makeStyles(() => ({
     background: " #eceff1",
     borderRadius: "0.5rem",
     padding: "0.5rem",
-    
   },
   subTitle: {
     padding: "0.8rem",
@@ -85,6 +84,10 @@ const useStyles = makeStyles(() => ({
     backgroundColor: "#eceff1",
     margin: "2rem 0",
   },
+  bank: {
+    margin: "0.5rem",
+    padding: "0.3rem"
+  }
 }));
 
 const TurnSelector = () => {
@@ -119,16 +122,87 @@ const TurnSelector = () => {
 
   return (
     <Grid container component="main" className={classes.flex}>
-      <Box elevation={3} className={classes.paper}>
-        <Typography align="center" variant="h5">
-          Clases y Lugares Disponibles
-        </Typography>
-      </Box>
       {!hours || !satHours || !thusHours ? (
         <Spinner />
       ) : (
         <form className={classes.form}>
           <Grid container>
+            <Grid item xs={12} md={3}>
+              <Paper elevation={3} className={classes.card}>
+                <Fragment>
+                  <img className={classes.logo} src={`${logo}`} alt="logo" />
+                </Fragment>
+                <Grid item xs={12} className={classes.flex}>
+                  <Hidden xsDown>
+                    <Card className={classes.titleCntnMedium} elevation={3}>
+                      <Typography className={classes.title} variant="body2" >
+                        Elegí días y horarios, verifica que haya disponibilidad
+                        y en caso que quieras inscribirte, estarás habilitado
+                        una vez que realices el pago por alguno de estos medios:
+                        Transferencia bancaria - Efectivo.
+                        <Card className={classes.bank}>
+                          <Typography variant="body2" style={{fontWeight: "bold"}}>
+                        Datos para transferencia:
+                        </Typography>
+                        <Typography variant="body2" style={{fontStyle: "italic", fontSize:"0.8rem"} }>
+                        Banco Nación
+                        <Typography />
+                        Caja de Ahorro: 33504941365949
+                        <Typography />
+                        CBU: 0110494730049413659497
+                        <Typography />
+                        Alias: OLE.TRANVIA.JINETE
+                        <Typography />
+                        Titular: PEREZ CASTRO EDUARDO
+                        <Typography />
+                        CUIL: 20271033401
+                        </Typography>
+                        </Card>
+                        En caso que realices
+                        una transferencia, por favor, mandanos el comprobante
+                        asi te habilitamos. Gracias y a entrenar!!!
+                      </Typography>
+                    </Card>
+                  </Hidden>
+                  <Hidden smUp>
+                    <Card className={classes.titleCntnSmall}>
+                    <Typography className={classes.title} variant="body2" >
+                        Elegí días y horarios, verifica que haya disponibilidad
+                        y en caso que quieras inscribirte, estarás habilitado
+                        una vez que realices el pago por alguno de estos medios:
+                        Transferencia bancaria - Efectivo.
+                        <Card className={classes.bank}>
+                          <Typography variant="body2" style={{fontWeight: "bold"}}>
+                        Datos para transferencia:
+                        </Typography>
+                        <Typography variant="body2" style={{fontStyle: "italic", fontSize:"0.8rem"} }>
+                        Banco Nación
+                        <Typography />
+                        Caja de Ahorro: 33504941365949
+                        <Typography />
+                        CBU: 0110494730049413659497
+                        <Typography />
+                        Alias: OLE.TRANVIA.JINETE
+                        <Typography />
+                        Titular: PEREZ CASTRO EDUARDO
+                        <Typography />
+                        CUIL: 20271033401
+                        </Typography>
+                        </Card>
+                        En caso que realices
+                        una transferencia, por favor, mandanos el comprobante
+                        asi te habilitamos. Gracias y a entrenar!!!
+                      </Typography>
+                    </Card>
+                  </Hidden>
+                </Grid>
+              </Paper>
+            </Grid>
+            <Box elevation={3} className={classes.paper}>
+              <Typography align="center" variant="h6">
+                Clases y Lugares Disponibles
+              </Typography>
+            </Box>
             <Grid item xs={12} md={3}>
               <MWF savedDays={savedDays} disabled={true} />
             </Grid>
@@ -138,47 +212,6 @@ const TurnSelector = () => {
             </Grid>
             <Grid item xs={12} md={3}>
               <SAT savedSatDays={savedSatDays} disabled={true} />
-            </Grid>
-            <Grid item xs={12} md={3}>
-              <Paper elevation={3} className={classes.card}>
-                <Fragment>
-                  <img className={classes.logo} src={`${logo}`} alt="logo" />
-                </Fragment>
-                <Grid item xs={12} className={classes.flex}>
-                  <Hidden xsDown>
-                    <Card className={classes.titleCntnMedium} elevation={3}>
-                      <Typography className={classes.title}>
-                        Elegí días y horarios, verifica que haya disponibilidad
-                        y en caso que quieras inscribirte, estarás habilitado
-                        una vez que realices el pago por alguno de estos medios:
-                        Transferencia bancaria - Efectivo. En caso que realices
-                        una transferencia, por favor, mandanos el comprobante
-                        asi te habilitamos. Gracias y a entrenar!!!
-                      
-                      </Typography>
-                    </Card>
-                  </Hidden>
-                  <Hidden smUp>
-                    <Card className={classes.titleCntnSmall}>
-                      <Typography className={classes.title}>
-                        Elegí días y horarios, verifica que haya disponibilidad
-                        y en caso que quieras inscribirte, estarás habilitado
-                        una vez que realices el pago por alguno de estos medios:
-                        Transferencia bancaria - Efectivo. En caso que realices
-                        una transferencia, por favor, mandanos el comprobante
-                        asi te habilitamos. Gracias y a entrenar!!!
-                      </Typography>
-                      {/* <Typography
-                        color="secondary"
-                        align="center"
-                        className={classes.subTitle}
-                      >
-                        Por favor ponete en contacto con JuaguarCF.
-                      // </Typography> */}
-                    </Card>
-                  </Hidden>
-                </Grid>
-              </Paper>
             </Grid>
           </Grid>
         </form>

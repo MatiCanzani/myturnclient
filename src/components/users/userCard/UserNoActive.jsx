@@ -151,7 +151,7 @@ const TurnSelector = () => {
                         <Typography />
                         CBU: 0110494730049413659497
                         <Typography />
-                        Alias: OLE.TRANVIA.JINETE
+                        Alias: OLEO.TRANVIA.JINETE
                         <Typography />
                         Titular: PEREZ CASTRO EDUARDO
                         <Typography />

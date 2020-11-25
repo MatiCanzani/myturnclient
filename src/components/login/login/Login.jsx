@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
-import { Card, makeStyles } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import logo from "../../assets/logocontorno.png";
 import Paper from "@material-ui/core/Paper";

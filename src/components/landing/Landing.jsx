@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/007.png";
 import Button from "@material-ui/core/Button";
@@ -8,7 +8,9 @@ import { Box} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import BackImg from "../assets/fondo.webp"
+import BackImg from "../assets/fondo.webp";
+import AuthContext from "../../context/autentication/authContext";
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -72,14 +74,21 @@ const Copyright = () => {
 };
 
 const Home = (props) => {
+  const authContext = useContext(AuthContext);
+  const { user, userAuthenticated } = authContext;
 
+    useEffect(() => {
+    userAuthenticated()
+       //eslint-disable-next-line
+  }, [])
+
+console.log(user)
   const redirects = () =>{
 
     const userData = JSON.parse( localStorage.getItem("userInfo"));
     const isLoged = localStorage.getItem("token");
     console.log(isLoged); 
     console.log(userData);
-
     if (isLoged) {
       if (userData) {
         if (userData.isAdmin === true) {

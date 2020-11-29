@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/07.png";
+import logo from "../assets/007.png";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Paper from "@material-ui/core/Paper";
@@ -8,18 +8,29 @@ import { Box} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import BackImg from "../assets/ryan-de-hamer-WIPIAJW2-P8-unsplash.jpg"
+import BackImg from "../assets/fondo.webp"
 
 
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
+  },
+
+  leftImage: {
+    height: "100vh",
     background: `url(${BackImg})`,
     backgroundRepeat: "none",
     backgroundSize: "cover"
   },
+  flex: {
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "column",
+  },
+  
   logo: {
-    width: "12rem",
+    width: "230px",
+    height: "289px",
   },
   paper: {
     margin: theme.spacing(2, 1),
@@ -84,12 +95,19 @@ const Home = (props) => {
 
   const classes = useStyles();
   return (
-    <Grid container component="main" className={classes.root}>
+    <Grid container component="main"  className={classes.root}>
       <CssBaseline />
-      <Grid container >
-      <Grid item  md={7} />
-        <Grid item xs={12} md={5} component={Paper} elevation={3} square>
-          <Box className={classes.box}  mt={15}>
+      <Grid container  >
+      <Grid item  md={12} />
+      <Grid item md={6}>
+          <Grid item>
+            <div  className={classes.leftImage}>
+              {/* <img src={`${BackImg}`} className={classes.logo} alt="bkk" /> */}
+            </div>
+          </Grid>
+        </Grid>
+        <Grid item xs={12} md={6} component={Paper} elevation={3} square className={classes.flex}>
+          <Box className={classes.box} >
             <div>
               <img src={`${logo}`} className={classes.logo} alt="logo" />
             </div>

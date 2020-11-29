@@ -90,6 +90,7 @@ const TurnSelector = () => {
 
   const [disabled, setDisabled] = useState(false);
   const [disabled2, setDisabled2] = useState(false);
+  const [btnDisabled, setBtnDisables] = useState(true);
 
   // Get initial state from userTurns
   const classTurnContext = useContext(turnContext);
@@ -102,6 +103,12 @@ const TurnSelector = () => {
     if (days.days === "") {
       setDisabled(false);
       setDisabled2(false);
+      setBtnDisables(true)
+    }
+    if (days.days === "" || satDays.days === "" ) {
+      setBtnDisables(true)
+    } else { 
+      setBtnDisables(false)
     }
 
     if (days.days === "Lunes / Miércoles / Viernes") {
@@ -111,6 +118,7 @@ const TurnSelector = () => {
         userSatHours: 0,
       });
       setDisabled2(true);
+      setBtnDisables(false)
     }
     if (days.days === "Martes / Jueves") {
       setUserSelection({
@@ -143,6 +151,8 @@ const TurnSelector = () => {
     getHoursSat();
     // eslint-disable-next-line
   }, []);
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -318,6 +328,7 @@ const TurnSelector = () => {
       );
     }
   };
+  
 
   return (
     <Grid container component="main" className={classes.flex}>
@@ -360,6 +371,7 @@ const TurnSelector = () => {
                 color="secondary"
                 variant="contained"
                 endIcon={<SendIcon />}
+                disabled={btnDisabled}
                 type="submit"
                 className={classes.button}
               >

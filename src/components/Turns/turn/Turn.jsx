@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: '360px',
   },
   user:{
-    transform: "uppercase"
+    transform: "capitalize"
   }
 }));
 

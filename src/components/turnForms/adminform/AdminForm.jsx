@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useContext, useEffect } from "react";
 import Hours from "../../hours/hour/Hours";
+import SatHours from "../../hours/sathours/SaturdayHours";
 import DaysOptions from "../../days/Days";
 import { Button, Card, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -94,7 +95,7 @@ const TurnSelector = () => {
       setUserTurns({
         userDay: days,
         userHours: 0,
-        userSatHours: hours,
+        userSatHours: satHours,
       });
     }
   }, [days, hours, satHours]);
@@ -111,24 +112,11 @@ const TurnSelector = () => {
     e.preventDefault();
     if (days === 0) {
       showAlert("Debes seleccionar un día");
-    } else if (hours === 0) {
+    } else if (hours === 0 ||satHours === 0 ) {
       showAlert("Debes seleccionar un horario");
     }
 
-    if (days === "Martes / Jueves / Sábados" && days === 0) {
-      showAlert("Debes seleccionar un día");
-    } else if (
-      days === "Martes / Jueves / Sábados" &&
-      hours !== 0 &&
-      satHours === 0
-    ) {
-      showAlert("Debes seleccionar un horario para los sábados");
-    }
-
     getUserTurns(userTurns);
-    savedSatHours({
-      satHours: "",
-    });
     setShowNames(true)
   };
 
@@ -138,13 +126,13 @@ const TurnSelector = () => {
     }
   }
 
-  console.log(userTurns)
+  console.log(satHours)
   return (
     <div className={classes.flex}>
       <Card elevation={3} className={classes.paper}>
         <form onSubmit={handleSubmit} className={classes.form}>
           <DaysOptions savedDays={savedDays} />
-          {days === 0 || days === "Lunes / Miércoles / Viernes" ? (
+          {days === "Sábado" ? (
             <Fragment>
               <div className={classes.subtitleCnt}>
                 <Icon>
@@ -155,7 +143,8 @@ const TurnSelector = () => {
                   &nbsp;Selecciona el horario
                 </Typography>
               </div>
-              <Hours savedHours={savedHours} />
+              <SatHours savedSatHours={savedSatHours} />            
+        
             </Fragment>
           ) : (
             <Fragment>
@@ -167,8 +156,7 @@ const TurnSelector = () => {
                   &nbsp;Selecciona el horario
                 </Typography>
               </div>
-              <Hours savedHours={savedHours} />
-              
+              <Hours savedHours={savedHours} />        
             </Fragment>
           )}
           <div>

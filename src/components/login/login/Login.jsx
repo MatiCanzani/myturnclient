@@ -15,7 +15,7 @@ import Paper from "@material-ui/core/Paper";
 import AlertContext from "../../../context/alert/AlertContext";
 import AuthContext from "../../../context/autentication/authContext";
 import Alert from "../../alerts/alerts";
-import BackImg from "../../assets/ryan-de-hamer-WIPIAJW2-P8-unsplash.jpg";
+import BackImg from "../../assets/fondo.webp"
 
 const Copyright = () => {
   return (
@@ -33,15 +33,19 @@ const Copyright = () => {
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
-    background: `url(${BackImg})`,
-    backgroundRepeat: "none",
-    backgroundSize: "cover",
   },
+
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+  },
+  leftImage: {
+    height: "100vh",
+    background: `url(${BackImg})`,
+    backgroundRepeat: "none",
+    backgroundSize: "cover"
   },
   logo: {
     width: "12rem",
@@ -59,6 +63,11 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "#ffcc29",
     },
     // width:"60%",
+  },
+  flex: {
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "column",
   },
   link: {
     textDecoration: "none",
@@ -179,8 +188,15 @@ export default function SignIn(props) {
   if (token) return null;
   return (
     <Grid container component="main" className={classes.root}>
-      <Grid item md={7} />
-      <Grid item xs={12} md={5} component={Paper} elevation={6} square>
+      <Grid item md={12} />
+      <Grid item md={6}>
+          <Grid item>
+            <div  className={classes.leftImage}>
+              {/* <img src={`${BackImg}`} className={classes.logo} alt="bkk" /> */}
+            </div>
+          </Grid>
+        </Grid>
+      <Grid item xs={12} md={5} component={Paper} elevation={6} square className={classes.flex}>
         <Container component="main">
           <CssBaseline />
           <div className={classes.paper}>

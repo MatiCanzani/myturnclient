@@ -51,6 +51,7 @@ const TurnList = () => {
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
+        console.log(id)
         deleteUserTurn(id);
         MySwal.fire({
           html: (

@@ -85,6 +85,7 @@ const TurnState = (props) => {
   };
 
   const deleteUserTurn = async (turnId) => {
+    console.log(turnId)
     try {
       const reply = await axios.delete(`/turns/${turnId}`);
       dispatch({

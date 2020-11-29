@@ -122,7 +122,7 @@ export default function SignIn(props) {
   const { alert, showAlert } = alertContext;
 
   const authContext = useContext(AuthContext);
-  const { message, userLogin, user, token } = authContext;
+  const { message, userLogin, user } = authContext;
 
   const [remember, setRemember] = useState(false);
 

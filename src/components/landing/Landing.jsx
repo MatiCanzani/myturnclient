@@ -78,27 +78,25 @@ const Home = (props) => {
   const { user, userAuthenticated } = authContext;
 
     useEffect(() => {
-    userAuthenticated()
+      const isLoged = localStorage.getItem("token");
+      if (isLoged) {
+        userAuthenticated();
+      };
        //eslint-disable-next-line
   }, [])
 
 console.log(user)
-  const redirects = () =>{
-
-    const isLoged = localStorage.getItem("token");
-    console.log(isLoged); 
-    if (isLoged) {
-      if (user) {
+  const redirects = () =>{    
+    if (user) {
         if (user.isAdmin === true) {
           props.history.push("/admin");
         } else {
           props.history.push("/user");
         }
-      }
     } else {
       props.history.push("/login");
     }
-  };
+  }
 
   const classes = useStyles();
   return (

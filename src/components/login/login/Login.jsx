@@ -185,7 +185,7 @@ export default function SignIn(props) {
     localStorage.setItem("logedIn", remember);
   };
 
-  if (token) return null;
+  if (!token) return null;
   return (
     <Grid container component="main" className={classes.root}>
       <Grid item md={12} />

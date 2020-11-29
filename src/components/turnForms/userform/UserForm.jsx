@@ -333,10 +333,10 @@ const TurnSelector = () => {
   return (
     <Grid container component="main" className={classes.flex}>
       <Box elevation={3} className={classes.paper}>
-      <Typography align="center" variant="h5">
+      <Typography align="center" component="h5">
           Clases y Lugares Disponibles
         </Typography>
-        <Typography align="center" variant="h6">
+        <Typography align="center" component="h6">
           Selecciona Días y Horarios
         </Typography>
       </Box>

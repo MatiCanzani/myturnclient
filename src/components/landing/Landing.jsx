@@ -85,13 +85,11 @@ const Home = (props) => {
 console.log(user)
   const redirects = () =>{
 
-    const userData = JSON.parse( localStorage.getItem("userInfo"));
     const isLoged = localStorage.getItem("token");
     console.log(isLoged); 
-    console.log(userData);
     if (isLoged) {
-      if (userData) {
-        if (userData.isAdmin === true) {
+      if (user) {
+        if (user.isAdmin === true) {
           props.history.push("/admin");
         } else {
           props.history.push("/user");

@@ -86,7 +86,7 @@ const Home = (props) => {
   }, [])
 
 console.log(user)
-  const redirects = () =>{    
+  const redirects = () =>{
     if (user) {
         if (user.isAdmin === true) {
           props.history.push("/admin");

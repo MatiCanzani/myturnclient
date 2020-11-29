@@ -277,7 +277,7 @@ const TurnSelector = () => {
       return (
         <Box style={{ margin: "1rem" }}>
           {" "}
-          <Typography variant="subtitle1" align="center" color="primary">
+          <Typography variant="subtitle1"component={'span'} align="center" color="primary">
             {" "}
             Debes seleccionar un turno
           </Typography>
@@ -288,24 +288,24 @@ const TurnSelector = () => {
       return (
         <Box style={{ margin: "1rem" }}>
           {" "}
-          <Typography color="primary" variant="subtitle1">
+          <Typography color="primary" variant="subtitle1"component={'span'}>
             {" "}
             Días : {days.days}
           </Typography>
-          <Typography color="primary" variant="subtitle1">
+          <Typography color="primary" variant="subtitle1" component={'span'}>
             {" "}
             Horario: {days.hour} hs{" "}
           </Typography>
           {satDays.days === "" ? (
-            <Typography color="secondary" variant="subtitle1">
+            <Typography color="secondary" variant="subtitle1"component={'span'}>
               Falta seleccionar el Sábado
             </Typography>
           ) : (
             <Fragment>
-              <Typography color="primary" variant="subtitle1">
+              <Typography color="primary" variant="subtitle1"component={'span'} >
                 Días : {satDays.days}
               </Typography>
-              <Typography color="primary" variant="subtitle1">
+              <Typography color="primary" variant="subtitle1"component={'span'}>
                 Horario: {satDays.hour} hs.{" "}
               </Typography>
             </Fragment>
@@ -316,11 +316,11 @@ const TurnSelector = () => {
       return (
         <Box style={{ margin: "1rem" }}>
           {" "}
-          <Typography color="primary" variant="subtitle1">
+          <Typography color="primary" variant="subtitle1" component="h6">
             {" "}
             Días : {days.days}
           </Typography>
-          <Typography color="primary" variant="subtitle1">
+          <Typography color="primary" variant="subtitle1" component="h6">
             {" "}
             Horario: {days.hour} hs{" "}
           </Typography>
@@ -333,10 +333,10 @@ const TurnSelector = () => {
   return (
     <Grid container component="main" className={classes.flex}>
       <Box elevation={3} className={classes.paper}>
-      <Typography align="center" component="h5">
+      <Typography align="center" variant="h5">
           Clases y Lugares Disponibles
         </Typography>
-        <Typography align="center" component="h6">
+        <Typography align="center" variant="h6">
           Selecciona Días y Horarios
         </Typography>
       </Box>
@@ -365,7 +365,7 @@ const TurnSelector = () => {
                 {" "}
                 Tu Selección:{" "}
               </Typography>
-              <Typography>{TueThuSat()}</Typography>
+              <Typography component={'span'}>{TueThuSat()}</Typography>
               <Button
                 onClick={() => reserve()}
                 color="secondary"

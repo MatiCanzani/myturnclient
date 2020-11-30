@@ -8,7 +8,7 @@ import { Box} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import BackImg from "../assets/fondo.webp";
+import BackImg from "../assets/fondo2.jpg";
 import AuthContext from "../../context/autentication/authContext";
 
 
@@ -21,8 +21,9 @@ const useStyles = makeStyles((theme) => ({
   leftImage: {
     height: "100vh",
     background: `url(${BackImg})`,
+
     backgroundRepeat: "none",
-    backgroundSize: "cover"
+    backgroundSize: "100%"
   },
   flex: {
     display: "flex",

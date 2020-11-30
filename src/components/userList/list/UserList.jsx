@@ -11,14 +11,14 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     justifyContent: "space-around",
     alignItems: "center",
-    textTransform: 'uppercase',
+    textTransform: 'capitalize',
     padding: '0px',
   },
   subtitle: {
     textAlign: 'center',
   },
   user: {
-    textTransform: 'uppercase',
+    textTransform: 'capitalize',
   }
 }));
 
@@ -26,12 +26,12 @@ const UserInfo = () => {
 
   // Get initial state from userTurns
   const userInfoContext = useContext(userContext);
-  const { userInfo, getUserInfo, getUserByDni, dni } = userInfoContext;
+  const { userInfo, getUserInfo, getUserByFirstName, firstName } = userInfoContext;
 
 
   //get user turn when load component
   useEffect(() => {
-    !dni ?  getUserInfo() : getUserByDni();
+    !firstName ?  getUserInfo() : getUserByFirstName();
     // eslint-disable-next-line
   }, []);
 

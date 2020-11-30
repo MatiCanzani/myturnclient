@@ -10,8 +10,8 @@ const UserState = props => {
     const initialState = {
         userInfo : [],
         newUserInfo: false,
-        getDni: {
-            dni: ''
+        getFirstName: {
+            firstName: ''
         },
     }
 
@@ -39,10 +39,10 @@ const UserState = props => {
        }
     }
 
-    const getUserByDni = async userDni => {
-        console.log(userDni.dni)
+    const getUserByFirstName = async userFirstName => {
+        console.log(userFirstName)
        try {
-           const reply = await axios.get(`/users/${userDni.dni}`)
+           const reply = await axios.get(`/users/${userFirstName.firstName}`)
             console.log(reply)
         dispatch({
             type: GET_USERS_INFO,
@@ -104,9 +104,9 @@ const UserState = props => {
                 // newuserInfo: state.newUserInfo,
                 showUserInfo,
                 // getUserInfoById,
-                getUserByDni,
+                getUserByFirstName,
                 getUserInfo,
-                getDni: state.getDni,
+                getFirstName: state.getFirstName,
                 updateUserInfo,
                 deleteUserById,
                 userActive

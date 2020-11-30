@@ -32,20 +32,20 @@ const useStyles = makeStyles(() => ({
 const UserSeachInfo = () => {
   const classes = useStyles();
   const userInfoContext = useContext(userContext);
-  const [ dni, setDni ] = useState({
-    dni: ''
+  const [ name, setName ] = useState({
+    name: ''
   })
-  const { getUserByDni} = userInfoContext;
+  const { getUserByFirstName} = userInfoContext;
   const getInputDni = e => {
-    setDni({
-      ...dni,
+    setName({
+      ...name,
       [e.target.name] : e.target.value
     })
   }
 
 const onSubmit = e => {
   e.preventDefault();
-  getUserByDni(dni)
+  getUserByFirstName(name)
 }
 
   return (
@@ -55,8 +55,8 @@ const onSubmit = e => {
       >
       <TextField 
       id="input" 
-      name="dni"
-      placeholder="Buscar por DNI"
+      name="firstName"
+      placeholder="Buscar por Nombre"
       onChange={getInputDni}
       />
       <Button

@@ -21,9 +21,9 @@ const useStyles = makeStyles((theme) => ({
   leftImage: {
     height: "100vh",
     background: `url(${BackImg})`,
-
-    backgroundRepeat: "none",
-    backgroundSize: "100%"
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
   },
   flex: {
     display: "flex",

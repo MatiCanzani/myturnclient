@@ -95,11 +95,11 @@ const Turns = () => {
   const classTurnContext = useContext(turnContext);
   const { userTurn, getUserTurnsById } = classTurnContext;
 
-  console.log(userTurn);
-  // useEffect(() => {
-  //   userAuthenticated();
-  //   // eslint-disable-next-line
-  // }, []);
+
+  useEffect(() => {
+    userAuthenticated();
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     getUserTurnsById(user._id);

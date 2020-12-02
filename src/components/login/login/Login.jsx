@@ -15,7 +15,7 @@ import Paper from "@material-ui/core/Paper";
 import AlertContext from "../../../context/alert/AlertContext";
 import AuthContext from "../../../context/autentication/authContext";
 import Alert from "../../alerts/alerts";
-import BackImg from "../../assets/fondo.webp"
+import BackImg from "../../assets/fondo2.jpg"
 
 const Copyright = () => {
   return (
@@ -41,11 +41,13 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
   },
+
   leftImage: {
     height: "100vh",
     background: `url(${BackImg})`,
-    backgroundRepeat: "none",
-    backgroundSize: "cover"
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
   },
   logo: {
     width: "12rem",
@@ -178,7 +180,7 @@ export default function SignIn(props) {
     userLogin({ email, password });
     localStorage.setItem("logedIn", remember);
 
-    
+
   };
 
   // if (!token) return null;

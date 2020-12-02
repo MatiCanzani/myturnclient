@@ -289,24 +289,34 @@ const TurnSelector = () => {
         <Box style={{ margin: "1rem" }}>
           {" "}
           <Typography color="primary" variant="subtitle1"component={'span'}>
-            {" "}
-            Días : {days.days}
+          
+            Días : {days.days} <br />
           </Typography>
+          {" "}
           <Typography color="primary" variant="subtitle1" component={'span'}>
-            {" "}
-            Horario: {days.hour} hs{" "}
+            
+            Horario: {days.hour} hs
+            <br />
           </Typography>
+         
           {satDays.days === "" ? (
             <Typography color="secondary" variant="subtitle1"component={'span'}>
+               
               Falta seleccionar el Sábado
+              <br />
             </Typography>
           ) : (
             <Fragment>
+               
               <Typography color="primary" variant="subtitle1"component={'span'} >
+              <br />
                 Días : {satDays.days}
+                
               </Typography>
               <Typography color="primary" variant="subtitle1"component={'span'}>
-                Horario: {satDays.hour} hs.{" "}
+             <br />
+                Horario: {satDays.hour} hs.
+               
               </Typography>
             </Fragment>
           )}
@@ -349,16 +359,13 @@ const TurnSelector = () => {
           <Grid item xs={12} md={3}>
             <MWF savedDays={savedDays} disabled={disabled} />
           </Grid>
-
           <Grid item xs={12} md={3}>
             <TT savedDays={savedDays} disabled={disabled2} />
           </Grid>
           <Grid item xs={12} md={3}>
             <SAT savedSatDays={savedSatDays} disabled={disabled2} />
           </Grid>
-
           <div>{alert ? <Alert alert={alert.msg} /> : null}</div>
-
           <Grid item xs={12} md={3}>
             <Paper elevation={3} className={classes.card}>
               <Typography variant="h6" component={"h1"} align="center" style={{marginTop:"1rem"}}>

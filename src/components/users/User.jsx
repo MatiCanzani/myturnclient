@@ -29,12 +29,12 @@ const Turns = () => {
   const { user } = authContext;
 
   const classTurnContext = useContext(turnContext);
-  const {userTurn, getHours } = classTurnContext;
+  const {userTurn, getHours, getUserTurnsById} = classTurnContext;
 
-  // useEffect(() => {
-  //   userAuthenticated();
-  //    // eslint-disable-next-line
-  // }, []);
+  useEffect(() => {
+    getUserTurnsById(user._id);
+     // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     getHours();
@@ -42,7 +42,7 @@ const Turns = () => {
   }, []);
 
 
-  
+  console.log(userTurn)
   const classes = useStyles();
   return (
       <Container className={classes.userCardCntr}> 

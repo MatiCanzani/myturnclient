@@ -129,12 +129,6 @@ export default function SignIn(props) {
   //get info from context
   const isLogged = localStorage.getItem("logedIn");
 
-  console.log(user);
-  // useEffect(() => {
-  //   userAuthenticated()
-  //      //eslint-disable-next-line
-  // }, [])
-
   const logedStatus = JSON.parse(isLogged);
   useEffect(() => {
     //   const logedStatus = JSON.parse(isLogged);
@@ -183,6 +177,8 @@ export default function SignIn(props) {
     }
     userLogin({ email, password });
     localStorage.setItem("logedIn", remember);
+
+    
   };
 
   // if (!token) return null;

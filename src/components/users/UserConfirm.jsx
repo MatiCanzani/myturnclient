@@ -95,10 +95,12 @@ const Turns = () => {
   const classTurnContext = useContext(turnContext);
   const { userTurn, getUserTurnsById } = classTurnContext;
 
-  useEffect(() => {
-    userAuthenticated();
-    // eslint-disable-next-line
-  }, []);
+  console.log(userTurn);
+  // useEffect(() => {
+  //   userAuthenticated();
+  //   // eslint-disable-next-line
+  // }, []);
+
   useEffect(() => {
     getUserTurnsById(user._id);
     // eslint-disable-next-line
@@ -135,7 +137,7 @@ const Turns = () => {
             <Hidden xsDown>
               <Card className={classes.titleCntnMedium} elevation={3}>
                 <Typography className={classes.title}>
-                  Tu reserva fue confirmada! <Emoji symbol="💪" label="force" />
+                  Tu reserva fue CONFIRMADA ! <Emoji symbol="💪" label="force" />
                 </Typography>
               </Card>
             </Hidden>

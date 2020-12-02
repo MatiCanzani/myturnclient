@@ -108,13 +108,18 @@ const TurnSelector = () => {
 
 
   const handleSubmit = (e) => {
-    console.log(days)
+    console.log(hours)
     e.preventDefault();
+    
+    if ( satHours === "" & days === "Sábado" || satHours === 0 & days === "Sábado"){
+      showAlert("Debes seleccionar un horario")
+    }  
     if (days === 0) {
       showAlert("Debes seleccionar un día");
-    } else if (hours === 0 ||satHours === 0 ) {
+    }  if (hours === 0 & days !== "Sábado"  || hours === "" & days !== "Sábado" ) {
       showAlert("Debes seleccionar un horario");
-    }
+    };
+
 
     getUserTurns(userTurns);
     setShowNames(true)
@@ -126,7 +131,6 @@ const TurnSelector = () => {
     }
   }
 
-  console.log(satHours)
   return (
     <div className={classes.flex}>
       <Card elevation={3} className={classes.paper}>

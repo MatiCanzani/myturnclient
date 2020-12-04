@@ -12,6 +12,8 @@ import {
   GET_THUSHOURS,
   GET_SATHOURS,
   GET_HOURS,
+  GET_SPACE,
+  CREATE_USER_TURNS_ERROR,
   
 } from "../../types/index";
 
@@ -36,11 +38,22 @@ const turnReducer = (state, action) => {
         // loading: false,
       };
     case CREATE_USER_TURNS:
+      console.log(action.payload)
       return {
         ...state,
-        userTurns: [...state.userTurns, action.payload],
-        newTurn: false,
+        // userTurns: [...state.userTurns, action.payload],
+        // newTurn: false,
+        confirmation: action.payload
       };
+
+      case GET_SPACE:
+        console.log(action.payload)
+        return {
+          ...state,
+          confirmMsg: action.payload,
+          // loading: false,
+        };
+
 
     case DELETE_TURN: {
       return {
@@ -56,14 +69,14 @@ const turnReducer = (state, action) => {
         // loading: false,
       };
     case SHOW_THUSHOURS:
-      console.log(action.payload)
+
       return {
         ...state,
         thusHours: action.payload,
         // loading: false,
       };
     case SHOW_SATHOURS:
-      console.log(action.payload)
+
       return {
         ...state,
         satHours: action.payload,
@@ -78,7 +91,7 @@ const turnReducer = (state, action) => {
       };
 
       case GET_THUSHOURS:
-        console.log(action.payload)
+  
         return {
           ...state,
           showThusHours: action.payload,
@@ -105,6 +118,11 @@ const turnReducer = (state, action) => {
         ...state,
         space: action.payload,
       };
+
+      case CREATE_USER_TURNS_ERROR:
+        return {
+          confirmMsg: action.payload
+        }
 
     default:
       return state;

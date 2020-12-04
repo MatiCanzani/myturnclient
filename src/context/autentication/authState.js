@@ -49,7 +49,6 @@ const AuthState = props => {
         };
         try {
             const reply = await axios.get('/auth')
-            console.log(reply.data)
             dispatch({
                 type: GET_USER,
                 payload: reply.data.user,

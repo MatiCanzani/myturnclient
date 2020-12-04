@@ -40,9 +40,6 @@ const Turns = () => {
     getHours();
     // eslint-disable-next-line
   }, []);
-
-
-  console.log(userTurn)
   const classes = useStyles();
   return (
       <Container className={classes.userCardCntr}> 

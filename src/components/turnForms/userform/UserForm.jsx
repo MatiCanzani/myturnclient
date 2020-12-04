@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect, Fragment } from "react";
 import { Button, Box, Typography, Grid, Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import SendIcon from '@material-ui/icons/Send';
+import SendIcon from "@material-ui/icons/Send";
 import AlertContext from "../../../context/alert/AlertContext";
 import Alert from "../../alerts/alerts";
 import turnContext from "../../../context/turn/turnContext";
@@ -11,9 +11,7 @@ import { useHistory } from "react-router-dom";
 import MWF from "../../home/L_M_V";
 import TT from "../../home/M_J";
 import SAT from "../../home/S";
-import Spinner from "../../spinner/Spinner"
-
-
+import Spinner from "../../spinner/Spinner";
 
 const useStyles = makeStyles(() => ({
   flex: {
@@ -83,7 +81,6 @@ const TurnSelector = () => {
   const [userSelection, setUserSelection] = useState(0);
   const [userSatSelection, setUserSatSelection] = useState(0);
 
-
   const [days, savedDays] = useState(0);
   // const [hours, savedHours] = useState(0);
   const [satDays, savedSatDays] = useState(0);
@@ -94,7 +91,15 @@ const TurnSelector = () => {
 
   // Get initial state from userTurns
   const classTurnContext = useContext(turnContext);
-  const { createUserTurns, hours, satHours, thusHours, getHours, getHoursThus, getHoursSat } = classTurnContext;
+  const {
+    createUserTurns,
+    hours,
+    satHours,
+    thusHours,
+    getHours,
+    getHoursThus,
+    getHoursSat,
+  } = classTurnContext;
 
   const alertContext = useContext(AlertContext);
   const { alert, showAlert } = alertContext;
@@ -103,12 +108,12 @@ const TurnSelector = () => {
     if (days.days === "") {
       setDisabled(false);
       setDisabled2(false);
-      setBtnDisables(true)
+      setBtnDisables(true);
     }
-    if (days.days === "" || satDays.days === "" ) {
-      setBtnDisables(true)
-    } else { 
-      setBtnDisables(false)
+    if (days.days === "" || satDays.days === "") {
+      setBtnDisables(true);
+    } else {
+      setBtnDisables(false);
     }
 
     if (days.days === "Lunes / Miércoles / Viernes") {
@@ -118,7 +123,7 @@ const TurnSelector = () => {
         userSatHours: 0,
       });
       setDisabled2(true);
-      setBtnDisables(false)
+      setBtnDisables(false);
     }
     if (days.days === "Martes / Jueves") {
       setUserSelection({
@@ -152,7 +157,6 @@ const TurnSelector = () => {
     // eslint-disable-next-line
   }, []);
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -184,18 +188,15 @@ const TurnSelector = () => {
       userHours: 0,
       userSatHours: satDays.hour,
     });
-   
   };
 
   const reserve = () => {
-
     if (days.days !== "Lunes / Miércoles / Viernes") {
       MySwal.fire({
-       
         html: (
           <Fragment>
-             <Typography variant="h5" style={{marginBottom: "1rem"}}>
-             Tu selección es: 
+            <Typography variant="h5" style={{ marginBottom: "1rem" }}>
+              Tu selección es:
             </Typography>
             <Typography variant="body1">
               {days.days} :{days.hour} hs,
@@ -203,7 +204,7 @@ const TurnSelector = () => {
             {""}
             <Typography variant="body1">
               {satDays.days} : {satDays.hour} hs
-              </Typography>
+            </Typography>
           </Fragment>
         ),
         icon: "warning",
@@ -218,8 +219,8 @@ const TurnSelector = () => {
           MySwal.fire({
             html: (
               <Fragment>
-                 <Typography variant="h5" style={{marginBottom: "1rem"}}>
-                 Reserva realizada con éxito!
+                <Typography variant="h5" style={{ marginBottom: "1rem" }}>
+                  Reserva realizada con éxito!
                 </Typography>
               </Fragment>
             ),
@@ -227,17 +228,17 @@ const TurnSelector = () => {
             confirmButtonColor: "#3f51b5",
           }).then(function (result) {
             if (result.value) {
-              history.push("/confirm");
+              history.push("/login");
             }
           });
         }
       });
     } else {
-      MySwal.fire({   
+      MySwal.fire({
         html: (
           <Fragment>
-             <Typography variant="h5" style={{marginBottom: "1rem"}}>
-             Tu selección es: 
+            <Typography variant="h5" style={{ marginBottom: "1rem" }}>
+              Tu selección es:
             </Typography>
             <Typography variant="body1">
               {days.days} :{days.hour} hs,
@@ -255,8 +256,8 @@ const TurnSelector = () => {
           MySwal.fire({
             html: (
               <Fragment>
-                 <Typography variant="h5" style={{marginBottom: "1rem"}}>
-                 Reserva realizada con éxito!
+                <Typography variant="h5" style={{ marginBottom: "1rem" }}>
+                  Reserva realizada con éxito!
                 </Typography>
               </Fragment>
             ),
@@ -264,7 +265,7 @@ const TurnSelector = () => {
             confirmButtonColor: "#3f51b5",
           }).then(function (result) {
             if (result.value) {
-              history.push("/confirm");
+              history.push("/login");
             }
           });
         }
@@ -277,7 +278,12 @@ const TurnSelector = () => {
       return (
         <Box style={{ margin: "1rem" }}>
           {" "}
-          <Typography variant="subtitle1"component={'span'} align="center" color="primary">
+          <Typography
+            variant="subtitle1"
+            component={"span"}
+            align="center"
+            color="primary"
+          >
             {" "}
             Debes seleccionar un turno
           </Typography>
@@ -288,35 +294,39 @@ const TurnSelector = () => {
       return (
         <Box style={{ margin: "1rem" }}>
           {" "}
-          <Typography color="primary" variant="subtitle1"component={'span'}>
-          
+          <Typography color="primary" variant="subtitle1" component={"span"}>
             Días : {days.days} <br />
-          </Typography>
-          {" "}
-          <Typography color="primary" variant="subtitle1" component={'span'}>
-            
+          </Typography>{" "}
+          <Typography color="primary" variant="subtitle1" component={"span"}>
             Horario: {days.hour} hs
             <br />
           </Typography>
-         
           {satDays.days === "" ? (
-            <Typography color="secondary" variant="subtitle1"component={'span'}>
-               
+            <Typography
+              color="secondary"
+              variant="subtitle1"
+              component={"span"}
+            >
               Falta seleccionar el Sábado
               <br />
             </Typography>
           ) : (
             <Fragment>
-               
-              <Typography color="primary" variant="subtitle1"component={'span'} >
-              <br />
+              <Typography
+                color="primary"
+                variant="subtitle1"
+                component={"span"}
+              >
+                <br />
                 Días : {satDays.days}
-                
               </Typography>
-              <Typography color="primary" variant="subtitle1"component={'span'}>
-             <br />
+              <Typography
+                color="primary"
+                variant="subtitle1"
+                component={"span"}
+              >
+                <br />
                 Horario: {satDays.hour} hs.
-               
               </Typography>
             </Fragment>
           )}
@@ -338,12 +348,11 @@ const TurnSelector = () => {
       );
     }
   };
-  
 
   return (
     <Grid container component="main" className={classes.flex}>
       <Box elevation={3} className={classes.paper}>
-      <Typography align="center" variant="h5">
+        <Typography align="center" variant="h5">
           Clases y Lugares Disponibles
         </Typography>
         <Typography align="center" variant="h6">
@@ -351,43 +360,48 @@ const TurnSelector = () => {
         </Typography>
       </Box>
 
-      {!hours || !satHours || !thusHours ?
-      (<Spinner />) :
-      (
+      {!hours || !satHours || !thusHours ? (
+        <Spinner />
+      ) : (
         <form onSubmit={handleSubmit} className={classes.form}>
-        <Grid container >
-          <Grid item xs={12} md={3}>
-            <MWF savedDays={savedDays} disabled={disabled} />
+          <Grid container>
+            <Grid item xs={12} md={3}>
+              <MWF savedDays={savedDays} disabled={disabled} />
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <TT savedDays={savedDays} disabled={disabled2} />
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <SAT savedSatDays={savedSatDays} disabled={disabled2} />
+            </Grid>
+            <div>{alert ? <Alert alert={alert.msg} /> : null}</div>
+            <Grid item xs={12} md={3}>
+              <Paper elevation={3} className={classes.card}>
+                <Typography
+                  variant="h6"
+                  component={"h1"}
+                  align="center"
+                  style={{ marginTop: "1rem" }}
+                >
+                  {" "}
+                  Tu Selección:{" "}
+                </Typography>
+                <Typography component={"span"}>{TueThuSat()}</Typography>
+                <Button
+                  onClick={() => reserve()}
+                  color="secondary"
+                  variant="contained"
+                  endIcon={<SendIcon />}
+                  disabled={btnDisabled}
+                  type="submit"
+                  className={classes.button}
+                >
+                  Reservar
+                </Button>
+              </Paper>
+            </Grid>
           </Grid>
-          <Grid item xs={12} md={3}>
-            <TT savedDays={savedDays} disabled={disabled2} />
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <SAT savedSatDays={savedSatDays} disabled={disabled2} />
-          </Grid>
-          <div>{alert ? <Alert alert={alert.msg} /> : null}</div>
-          <Grid item xs={12} md={3}>
-            <Paper elevation={3} className={classes.card}>
-              <Typography variant="h6" component={"h1"} align="center" style={{marginTop:"1rem"}}>
-                {" "}
-                Tu Selección:{" "}
-              </Typography>
-              <Typography component={'span'}>{TueThuSat()}</Typography>
-              <Button
-                onClick={() => reserve()}
-                color="secondary"
-                variant="contained"
-                endIcon={<SendIcon />}
-                disabled={btnDisabled}
-                type="submit"
-                className={classes.button}
-              >
-                Reservar
-              </Button>
-            </Paper>
-          </Grid>
-        </Grid>
-      </form>
+        </form>
       )}
     </Grid>
   );

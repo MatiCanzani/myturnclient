@@ -86,7 +86,6 @@ const Home = (props) => {
        //eslint-disable-next-line
   }, [])
 
-console.log(user)
   const redirects = () =>{
     if (user) {
         if (user.isAdmin === true) {

@@ -65,8 +65,6 @@ const Home = (props) => {
 
     const userData = JSON.parse( localStorage.getItem("userInfo"));
     const isLoged = localStorage.getItem("logedIn");
-    console.log(isLoged);
-    console.log(userData);
 
     if (isLoged === "true") {
       if (userData) {

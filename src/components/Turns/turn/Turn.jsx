@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Turn = ({ userTurn }) => {
+  console.log(userTurn)
   const classes = useStyles();
   return (
     <List dense className={classes.root}>

@@ -15,6 +15,8 @@ import {
   GET_THUSHOURS,
   SHOW_SATHOURS,
   GET_SATHOURS, 
+  GET_SPACE,
+  CREATE_USER_TURNS_ERROR
 } from "../../types/index";
 import axios from "../../config/axios";
 
@@ -32,6 +34,12 @@ const TurnState = (props) => {
     showThusHours: [],
     showSatHours: [],
     space: [],
+    confirmation: null,
+    spaceAvailable: null,
+    message: "sin mensaje",
+    confirmMsg: null
+
+    
   };
 
   const [state, dispatch] = useReducer(turnReducer, initialState);
@@ -77,12 +85,40 @@ const TurnState = (props) => {
       const reply = await axios.post("/turns", userTurns);
       dispatch({
         type: CREATE_USER_TURNS,
-        payload: reply.data,
+        payload: reply.data.msg,
+      });
+    } catch (error) {
+     
+      const alert = {
+        msg: error.response.data.msg,
+      }
+      console.log(alert);
+      dispatch({
+        type: CREATE_USER_TURNS_ERROR,
+        payload: alert
+    })
+   
+    }
+  };
+
+  const confirmSpace =  async (userTurns) => {
+    try {
+      const reply = await axios.get('/turns',{ 
+        params: {
+        userDay: userTurns.userDay,
+        userHours: userTurns.userHours,
+        userSatHours: userTurns.userSatHours
+      }
+      });
+      console.log(reply.data.msg)
+      dispatch({
+        type: GET_SPACE,
+        payload: reply.data.msg
       });
     } catch (error) {
       console.log(error);
     }
-  };
+  }; 
 
   const deleteUserTurn = async (turnId) => {
     console.log(turnId)
@@ -209,6 +245,10 @@ const TurnState = (props) => {
         showHours: state.showHours,
         showThusHours: state.showThusHours,
         showSatHours: state.showSatHours,
+        confirmation: state.confirmation,
+        spaceAvailable: state.spaceAvailable,
+        message: state.message,
+        confirmMsg:state.confirmMsg,
         showUserList,
         getUserTurns,
         createUserTurns,
@@ -222,6 +262,7 @@ const TurnState = (props) => {
         showSatHour,
         showHour,
         showThusHour,
+        confirmSpace,
       }}
     >
       {props.children}

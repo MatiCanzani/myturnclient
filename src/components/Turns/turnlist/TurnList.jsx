@@ -25,6 +25,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+
 const TurnList = () => {
   const classTurnContext = useContext(turnContext);
   const { userTurns, deleteUserTurn } = classTurnContext;
@@ -51,7 +52,6 @@ const TurnList = () => {
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log(id)
         deleteUserTurn(id);
         MySwal.fire({
           html: (

@@ -14,6 +14,7 @@ import {
   GET_HOURS,
   GET_SPACE,
   CREATE_USER_TURNS_ERROR,
+  GET_USERS_TURNS_BY_ID_ERROR
   
 } from "../../types/index";
 
@@ -25,33 +26,28 @@ const turnReducer = (state, action) => {
         newTurn: true,
       };
     case GET_USERS_TURNS_BY_ID:
+      console.log(action.payload);
       return {
         ...state,
         userTurn: action.payload,
-        // loading: false,
       };
 
     case GET_USERS_TURNS:
       return {
         ...state,
         userTurns: action.payload,
-        // loading: false,
       };
     case CREATE_USER_TURNS:
-      console.log(action.payload)
       return {
         ...state,
-        // userTurns: [...state.userTurns, action.payload],
-        // newTurn: false,
         confirmation: action.payload
       };
 
       case GET_SPACE:
-        console.log(action.payload)
+
         return {
           ...state,
           confirmMsg: action.payload,
-          // loading: false,
         };
 
 
@@ -99,7 +95,7 @@ const turnReducer = (state, action) => {
         };
   
       case GET_SATHOURS:
-        console.log(action.payload)
+
         return {
           ...state,
           showSatHours: action.payload,
@@ -123,6 +119,10 @@ const turnReducer = (state, action) => {
         return {
           confirmMsg: action.payload
         }
+        case GET_USERS_TURNS_BY_ID_ERROR: 
+          return{
+            userTurn: action.payload,
+          }
 
     default:
       return state;

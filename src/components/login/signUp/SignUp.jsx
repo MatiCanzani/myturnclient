@@ -105,7 +105,6 @@ useEffect(() => {
   if (authentication) {
     props.history.push("/");
   }
-
   // if (message) {
   //   showAlert(message.msg);
   // }
@@ -161,8 +160,8 @@ const onSubmit = (e) => {
   return (
     <Grid container component="main" className={classes.root}>
     <CssBaseline />
-    <Grid container xs={12}>
-      <Grid item xs={0} md={6} />
+    <Grid item container xs={12}>
+      <Grid item xs={12} md={6} />
       <Grid item xs={12} md={6} component={Paper} elevation={6} square>
           <Container component="main" maxWidth="xs">
             <CssBaseline />
@@ -174,7 +173,7 @@ const onSubmit = (e) => {
           Crea tu cuenta
         </Typography>
         <form className={classes.form}  onSubmit={onSubmit}>
-          <Grid container spacing={2}>
+          <Grid item container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
                 size="small"

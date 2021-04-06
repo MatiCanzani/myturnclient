@@ -1,9 +1,7 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, Fragment} from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
@@ -16,6 +14,10 @@ import AlertContext from "../../../context/alert/AlertContext";
 import AuthContext from "../../../context/autentication/authContext";
 import Alert from "../../alerts/alerts";
 import BackImg from "../../assets/fondo2.jpg"
+import Swal from "sweetalert2/src/sweetalert2.js";
+import withReactContent from "sweetalert2-react-content";
+
+const MySwal = withReactContent(Swal);
 
 const Copyright = () => {
   return (
@@ -124,34 +126,9 @@ export default function SignIn(props) {
   const { alert, showAlert } = alertContext;
 
   const authContext = useContext(AuthContext);
-  const { message, userLogin, user } = authContext;
+  const { forgotPass,  } = authContext;
 
-  const [remember, setRemember] = useState(false);
-
-  //get info from context
-  const isLogged = localStorage.getItem("logedIn");
-
-  const logedStatus = JSON.parse(isLogged);
-  useEffect(() => {
-    //   const logedStatus = JSON.parse(isLogged);
-    setRemember(logedStatus);
-    localStorage.setItem("logedIn", remember);
-    //eslint-disable-next-line
-  }, []);
-
-  useEffect(() => {
-    if (user) {
-      if (user.isAdmin === true) {
-        props.history.push("/admin");
-        localStorage.setItem("userInfo", JSON.stringify(user));
-      } else {
-        props.history.push("/user");
-      }
-    }
-    //eslint-disable-next-line
-  });
-
-  const { email, password } = userData;
+  const { email } = userData;
 
   const onChange = (e) => {
     setUser({
@@ -159,28 +136,30 @@ export default function SignIn(props) {
       [e.target.name]: e.target.value,
     });
   };
-
-  const handleChange = (e) => {
-    setRemember(e.target.checked);
-  };
-
   const onSubmit = (e) => {
     e.preventDefault();
-    if (message) {
-      showAlert(message.msg);
-    }
     //when user try to login
-    if (email.trim() === "" || password.trim() === "") {
+    if (email.trim() === "") {
       showAlert("Todos los campos son obligatorios");
+    } else {
+      MySwal.fire({
+        html: (
+          <Fragment>
+            <Typography variant="h6" style={{ marginBottom: "1rem" }}>
+              Revisa tu correo para realizar el cambio.
+            </Typography>
+          </Fragment>
+        ),
+        icon: "info",
+        confirmButtonColor: "##00897b",
+        confirmButtonText: "Ok",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          props.history.push("/login");
+        }
+      });
     }
-    //if pass < than 8
-    if (password.length < 8) {
-      showAlert("La contraseña debe contener al menos 8 caracteres");
-    }
-  
-    userLogin({ email, password });
-    localStorage.setItem("logedIn", remember);
-
+    forgotPass({ email,});
   };
 
   // if (!token) return null;
@@ -190,7 +169,6 @@ export default function SignIn(props) {
       <Grid item md={6}>
           <Grid item>
             <div  className={classes.leftImage}>
-              {/* <img src={`${BackImg}`} className={classes.logo} alt="bkk" /> */}
             </div>
           </Grid>
         </Grid>
@@ -212,31 +190,9 @@ export default function SignIn(props) {
                 id="email"
                 label="Email"
                 name="email"
-                autoComplete="username"
                 value={email}
                 onChange={onChange}
-              />
-              <TextField
-                className={classes.input}
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                autoComplete="current-password"
-                id="password"
-                value={password}
-                onChange={onChange}
-              />
-              <FormControlLabel
-                control={<Checkbox checked={remember} />}
-                label={<Typography variant="body2">Recordarme</Typography>}
-                className={classes.input}
-                onChange={handleChange}
-                type="input"
-              />
+              />    
               {alert ? <Alert alert={alert.msg} /> : null}
               <Button
                 type="submit"
@@ -244,17 +200,17 @@ export default function SignIn(props) {
                 variant="contained"
                 className={classes.submit}
               >
-                Iniciar sesión
+                Resetear Contraseña
               </Button>
               <Grid container>
                 <Grid item xs={9}>
-                  <Link to="/forgot" variant="body2" className={classes.link}>
-                    Olvidaste tu contraseña?
+                  <Link to="/login" variant="body2" className={classes.link}>
+                    Volver a Login
                   </Link>
                 </Grid>
                 <Grid item>
                   <Link to="/signup" variant="body2" className={classes.link}>
-                    Crear cuenta
+                    Crear Cuenta
                   </Link>
                 </Grid>
               </Grid>

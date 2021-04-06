@@ -53,7 +53,7 @@ const AdminTurns = ({ id }) => {
       {/* <UpBar /> */}
       <Container component="main" maxWidth="sm">
         <CssBaseline />
-        <Grid container spacing={2} className={classes.formCntr} sm={12}>
+        <Grid item container spacing={2} className={classes.formCntr} sm={12}>
           <Card elevation={3} className={classes.box}>
             <Typography variant="h5" className={classes.title}>
               Control de Clases

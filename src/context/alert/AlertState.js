@@ -8,15 +8,13 @@ const AlertState = props => {
     const initialState = {
         alert: null
     }
-
     const [ state, dispatch ] = useReducer(alertReducer, initialState);
-
+    
     const showAlert= (msg) => {
-        console.log(msg)
         dispatch ({
             type: SHOW_ALERT,
             payload: {
-                msg, 
+                msg
             } 
         });
    
@@ -33,7 +31,6 @@ const AlertState = props => {
         value={{
             alert: state.alert,
             showAlert
-
         }}
         >
             {props.children}

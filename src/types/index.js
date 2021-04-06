@@ -13,6 +13,7 @@ export const GET_USERS_TURNS = "GET_USERS_TURNS";
 export const CREATE_USER_TURNS = "CREATE_USER_TURNS";
 export const GET_USERS_TURNS_BY_ID = "GET_USERS_TURNS_BY_ID";
 export const CREATE_USER_TURNS_ERROR = "CREATE_USER_TURNS_ERROR";
+export const GET_USERS_TURNS_BY_ID_ERROR = "GET_USERS_TURNS_BY_ID_ERROR"
 
 export const DELETE_TURN = "DELETE_TURN";
 export const SHOW_DAYS = "SHOW_DAYS";
@@ -29,5 +30,12 @@ export const GET_USERS_INFO = "GET_USERS_INFO";
 export const UPDATE_USER_INFO = "UPDATE_USER_INFO";
 export const SHOW_USER_INFO = "SHOW_USER_INFO";
 export const DELETE_USER = "DELETE_USER";
+export const DELETE_USER_ERROR = "DELETE_USER_ERROR";
 export const USER_ACTIVE = "USER_ACTIVE";
 export const USER_ADMIN = "USER_ADMIN";
+
+export const RESET_PASS = "RESET_PASS";
+export const RESET_ERROR = "RESET_ERROR";
+
+export const FORGOT_PASS = "FORGOT_PASS";
+export const FORGOT_ERROR = "FORGOT_ERROR";

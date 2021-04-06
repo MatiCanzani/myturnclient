@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Card, Divider, List, ListItem } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import userContext from "../../../context/user/userContext";
@@ -71,7 +71,7 @@ const User = ({ user }) => {
   const deleteUser = (id) => {
     Swal.fire({
       title: "Seguro que queres eliminarlo?",
-      text: "Una vez realizado no se puede revertir!",
+      text: "Antes de eliminarlo, verifica que no tengan turnos agendados!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#009688",
@@ -89,13 +89,12 @@ const User = ({ user }) => {
             }
           }
         );
-      }
+      } 
     });
   };
 
   //chage useer active condition
   const chageUserActive = (user) => {
-    console.log(user);
     if (user.isActive) {
       user.isActive = false;
     } else {
@@ -119,7 +118,6 @@ const User = ({ user }) => {
     } else {
       setChildren(edit);
     }
-    //  console.log({value: e.target.value})
   };
   const classes = useStyles();
   return (

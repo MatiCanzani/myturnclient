@@ -1,8 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Button, CssBaseline, Box } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import userContext from "../../context/user/userContext";
+import turnContext from "../../context/turn/turnContext";
 import ReactExport from "react-export-excel";
 
 const ExcelFile = ReactExport.ExcelFile;
@@ -32,13 +33,25 @@ const useStyles = makeStyles(() => ({
     marginBottom: "20px",
     display: "flex",
     justifyContent: "space-between",
-    alignItems: "center"
+    alignItems: "center",
   },
   excel: {
     backgroundColor: "#42aaa0",
     color: "#ffffff",
     textTransform: "capitalize",
+    margin: "0.4rem", 
+    '&:hover': {
+      backgroundColor: "#36837b",
+    },
+    '&:focus': {
+      backgroundColor: "#36837b",
+    }
   },
+  exports : {
+    display: "flex",
+    justifyContent: "space-around",
+    flexDirection: "column",
+  }
 }));
 
 const UserSeachInfo = () => {
@@ -48,8 +61,16 @@ const UserSeachInfo = () => {
     name: "",
   });
   const userInfoContext = useContext(userContext);
-
   const { getUserByFirstName, userInfo } = userInfoContext;
+
+  const classTurnContext = useContext(turnContext);
+  const { getUserTurns, userTurns } = classTurnContext;
+
+useEffect(() => {
+  getUserTurns();
+// eslint-disable-next-line
+},[])
+
   const getInputName = (e) => {
     setName({
       ...name,
@@ -74,7 +95,17 @@ const UserSeachInfo = () => {
     return fullUser;
   });
 
-  console.log();
+  const getTurnsWithName = userTurns.map((turn) => {
+    const turnWithName = {
+      name: turn.userName.firstName,
+      lastName: turn.userName.lastName,
+      userDay: turn.userDay,
+      userHour: turn.userHours,
+      userSatHours: turn.userSatHours,
+    };
+    return turnWithName;
+  });
+
   return (
     <Box className={classes.cntr}>
       <CssBaseline />
@@ -98,20 +129,37 @@ const UserSeachInfo = () => {
         >
           <SearchIcon className={classes.icon} />
         </Button>
-        
       </form>
+      <Box className= {classes.exports}>
+        <Box>
+        <ExcelFile
+          element={<Button className={classes.excel}>Usuarios</Button>}
+          filename="Usuarios"
+        >
+          <ExcelSheet data={fullUsers} name="Usuarios">
+            <ExcelColumn label="Nombre" value="name" />
+            <ExcelColumn label="Apellido" value="lastName" />
+            <ExcelColumn label="email" value="email" />
+            <ExcelColumn label="Teléfono" value="Phone" />
+            <ExcelColumn label="DNI" value="DNI" />
+          </ExcelSheet>
+        </ExcelFile>
+        </Box>
+      <Box>
       <ExcelFile
-        element={<Button className={classes.excel}>Exportar</Button>}
-        filename="Usuarios"
-      >
-        <ExcelSheet data={fullUsers} name="Usuarios">
-          <ExcelColumn label="Nmbre" value="name" />
-          <ExcelColumn label="Apellido" value="lastName" />
-          <ExcelColumn label="email" value="email" />
-          <ExcelColumn label="Teléfono" value="Phone" />
-          <ExcelColumn label="DNI" value="DNI" />
-        </ExcelSheet>
-      </ExcelFile>
+          element={<Button className={classes.excel} >Turnos</Button>}
+          filename="Turnos"
+        >
+          <ExcelSheet data={getTurnsWithName} name="Turnos">
+            <ExcelColumn label="Nombre" value="name" />
+            <ExcelColumn label="Apellido" value="lastName" />
+            <ExcelColumn label="Dia" value="userDay" />
+            <ExcelColumn label="Hora" value="userHour" />
+            <ExcelColumn label="Hora Sabados" value="userSatHours" />
+          </ExcelSheet>
+        </ExcelFile>
+      </Box>
+      </Box>
     </Box>
   );
 };

@@ -74,6 +74,9 @@ const TurnSelector = () => {
   const alertContext = useContext(AlertContext);
   const { alert, showAlert } = alertContext;
 
+
+
+
   useEffect(() => {
     if (days === "Lunes / Miércoles / Viernes") {
       setUserTurns({
@@ -99,13 +102,6 @@ const TurnSelector = () => {
       });
     }
   }, [days, hours, satHours]);
-
-// useEffect(() => {
-//   getUserTurns(userTurns);
-//   //eslint-disable-next-line
-// },[userTurns])
-
-
 
   const handleSubmit = (e) => {
     console.log(hours)

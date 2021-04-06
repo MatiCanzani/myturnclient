@@ -1,4 +1,4 @@
-import { REGISTER_OK, REGISTER_ERROR, LOGIN_OK, LOGIN_ERROR, CLOSE_SESSION, GET_USER, USER_ADMIN } from '../../types/index';
+import { REGISTER_OK, REGISTER_ERROR, LOGIN_OK, LOGIN_ERROR, CLOSE_SESSION, GET_USER, USER_ADMIN,RESET_PASS, RESET_ERROR,  FORGOT_ERROR } from '../../types/index';
 
 const authReducer =  (state, action) => {
     switch (action.type) {
@@ -12,11 +12,19 @@ const authReducer =  (state, action) => {
                 loading: false,
                 token: action.payload.token,
             }
-      
+
         case USER_ADMIN:
             return {
                 ...state,
                 isAdmin: action.payload
+            }
+
+        case RESET_PASS:
+            console.log(action.payload)
+            return {
+               
+                ...state,
+                // user: action.payload   
             }
         case GET_USER:
             return {
@@ -38,6 +46,13 @@ const authReducer =  (state, action) => {
                 isActive: null,
                 message: action.payload
             }
+        case RESET_ERROR : 
+        case FORGOT_ERROR : 
+         return{
+            ...state,
+            user: null,
+            message: action.payload
+         }
             
         default:
             return state

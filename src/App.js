@@ -1,6 +1,8 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Login from "./components/login/login/Login";
+import ResetPassword from "./components/login/reset/ResetPassword";
+import ForgotPassword from "./components/login/reset/ForgotPassword";
 import SignUp from "./components/login/signUp/SignUp";
 import User from "./components/users/User.jsx";
 import UserConfirm from "./components/users/UserConfirm.jsx";
@@ -35,6 +37,8 @@ function App() {
                 <Route exact path="/home" component={Home} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/signup" component={SignUp} />
+                <Route exact path="/forgot" component={ForgotPassword} />
+                <Route exact path="/reset/:id" component={ResetPassword} />
                 <Layout>
                   <PrivateRourte exact path="/user" component={User} />
                   <PrivateRourte path="/confirm" component={UserConfirm} />{" "}

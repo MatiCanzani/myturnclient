@@ -57,11 +57,11 @@ const TurnState = (props) => {
       const reply = await axios.get("/turns", {
         params: userTurns,
       });
-
       dispatch({
         type: GET_USERS_TURNS,
         payload: reply.data.userTurn,
       });
+  
     } catch (error) {
       console.log(error);
     }
@@ -69,11 +69,12 @@ const TurnState = (props) => {
   const getUserTurnsById = async (userId) => {
     try {
       const reply = await axios.get(`/turns/${userId}`);
-      console.log(reply)
+      
       dispatch({
         type: GET_USERS_TURNS_BY_ID,
-        payload: reply.data.userTurn,
+        payload: reply.data.userTurn
       });
+      console.log(reply.data.userTurn)
     } catch (error) {
       console.log(error);
     }

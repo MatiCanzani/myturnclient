@@ -126,7 +126,7 @@ export default function SignIn(props) {
   const { alert, showAlert } = alertContext;
 
   const authContext = useContext(AuthContext);
-  const { forgotPass,  } = authContext;
+  const { forgotPass, message  } = authContext;
 
   const { email } = userData;
 
@@ -141,7 +141,11 @@ export default function SignIn(props) {
     //when user try to login
     if (email.trim() === "") {
       showAlert("Todos los campos son obligatorios");
-    } else {
+    }  
+    if (message) {
+      showAlert(message.msg);
+    } 
+    
       MySwal.fire({
         html: (
           <Fragment>
@@ -158,8 +162,7 @@ export default function SignIn(props) {
           props.history.push("/login");
         }
       });
-    }
-    forgotPass({ email,});
+    forgotPass({ email });
   };
 
   // if (!token) return null;

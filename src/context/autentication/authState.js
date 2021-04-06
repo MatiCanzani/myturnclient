@@ -110,7 +110,6 @@ const AuthState = props => {
                 payload: reply.data
             })
         } catch (error) {
-           
             const alert = {
                 msg: error.response.data.msg,
             }

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { Card, Divider, List, ListItem } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import userContext from "../../../context/user/userContext";

@@ -26,16 +26,16 @@ const turnReducer = (state, action) => {
         newTurn: true,
       };
     case GET_USERS_TURNS_BY_ID:
-      console.log(action.payload);
       return {
         ...state,
         userTurn: action.payload,
       };
 
     case GET_USERS_TURNS:
+      console.log(action.payload);
       return {
         ...state,
-        userTurns: action.payload,
+        userTurns: action.payload
       };
     case CREATE_USER_TURNS:
       return {

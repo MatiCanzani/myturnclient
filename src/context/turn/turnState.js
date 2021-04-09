@@ -60,7 +60,8 @@ const TurnState = (props) => {
       dispatch({
         type: GET_USERS_TURNS,
         payload: reply.data.userTurn,
-      });
+        
+      }); 
   
     } catch (error) {
       console.log(error);

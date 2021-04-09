@@ -95,7 +95,10 @@ useEffect(() => {
     return fullUser;
   });
 
-  const getTurnsWithName = userTurns.map((turn) => {
+const newUserTurns = [];
+
+const getSortedTurns = () => {
+  userTurns.map((turn)=> {
     const turnWithName = {
       name: turn.userName.firstName,
       lastName: turn.userName.lastName,
@@ -103,8 +106,27 @@ useEffect(() => {
       userHour: turn.userHours,
       userSatHours: turn.userSatHours,
     };
-    return turnWithName;
+    newUserTurns.push(turnWithName)
+    return newUserTurns;
   });
+
+  const compareName  = (a, b) => {
+    let userNameA = a.name;
+    let userNameB= b.name;
+
+   if(userNameA < userNameB){
+           return -1;
+   }else if(a.item > b.item){
+           return 1;
+   }else{
+           return 0;
+   }
+}
+  
+newUserTurns.sort(compareName).sort();
+
+return newUserTurns
+}
 
   return (
     <Box className={classes.cntr}>
@@ -150,7 +172,7 @@ useEffect(() => {
           element={<Button className={classes.excel} >Turnos</Button>}
           filename="Turnos"
         >
-          <ExcelSheet data={getTurnsWithName} name="Turnos">
+          <ExcelSheet data={getSortedTurns} name="Turnos">
             <ExcelColumn label="Nombre" value="name" />
             <ExcelColumn label="Apellido" value="lastName" />
             <ExcelColumn label="Dia" value="userDay" />
